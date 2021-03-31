@@ -5,14 +5,18 @@ import org.bukkit.Bukkit;
 import me.levansj01.verus.type.Loader;
 import net.md_5.bungee.api.ChatColor;
 
+import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class CustomLoader extends Loader {
-    private String prefix = "[VerusLoader] ";
-    private String[] commandClasses = { "me.levansj01.verus.command.impl.AlertsCommand",
+    private final String prefix = "[VerusLoader] ";
+
+    private final String[] commandClasses = { "me.levansj01.verus.command.impl.AlertsCommand",
             "me.levansj01.verus.command.impl.LogsCommand", "me.levansj01.verus.command.impl.ManualBanCommand",
             "me.levansj01.verus.command.impl.PingCommand", "me.levansj01.verus.command.impl.RecentLogsCommand",
             "me.levansj01.verus.command.impl.VerusCommand", };
 
-    private String[] checkClasses = { "me.levansj01.verus.check.checks.badpackets.BadPacketsA",
+    private final String[] checkClasses = { "me.levansj01.verus.check.checks.badpackets.BadPacketsA",
             "me.levansj01.verus.check.checks.badpackets.BadPacketsB",
             "me.levansj01.verus.check.checks.badpackets.BadPacketsC",
             "me.levansj01.verus.check.checks.badpackets.BadPacketsD",
@@ -59,7 +63,7 @@ public class CustomLoader extends Loader {
             "me.levansj01.verus.check.checks.timer.TimerA", "me.levansj01.verus.check.checks.timer.TimerB",
             "me.levansj01.verus.check.checks.velocity.VelocityC" };
 
-    private String[] premiumCheckClasses = { "me.levansj01.verus.type.premium.checks.aim.AimA",
+    private final String[] premiumCheckClasses = { "me.levansj01.verus.type.premium.checks.aim.AimA",
             "me.levansj01.verus.type.premium.checks.aim.AimA1", "me.levansj01.verus.type.premium.checks.aim.AimC",
             "me.levansj01.verus.type.premium.checks.aim.AimD", "me.levansj01.verus.type.premium.checks.aim.AimH",
             "me.levansj01.verus.type.premium.checks.aim.AimJ",
@@ -98,46 +102,44 @@ public class CustomLoader extends Loader {
         loadCommands();
         loadChecks();
         loadPremiumChecks();
-
     }
 
     public void loadCommands() {
-        int i = 0;
-        for (String s : commandClasses) {
+        AtomicInteger i = new AtomicInteger();
+        Arrays.stream(commandClasses).forEach(s -> {
             try {
                 Class.forName(s);
-                i++;
+                i.getAndIncrement();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-        }
+        });
         Bukkit.getConsoleSender().sendMessage(ChatColor.RED + prefix + "Loaded " + i + " Commands");
     }
 
     public void loadChecks() {
-        int i = 0;
-        for (String s : checkClasses) {
+        AtomicInteger i = new AtomicInteger();
+        Arrays.stream(checkClasses).forEach(s -> {
             try {
                 Class.forName(s);
-                i++;
+                i.getAndIncrement();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-        }
+        });
         Bukkit.getConsoleSender().sendMessage(ChatColor.RED + prefix + "Loaded " + i + " Basic Checks");
     }
 
     public void loadPremiumChecks() {
-        int i = 0;
-        for (String s : premiumCheckClasses) {
+        AtomicInteger i = new AtomicInteger();
+        Arrays.stream(premiumCheckClasses).forEach(s -> {
             try {
                 Class.forName(s);
-                i++;
+                i.getAndIncrement();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-        }
+        });
         Bukkit.getConsoleSender().sendMessage(ChatColor.RED + prefix + "Loaded " + i + " Premium Checks");
     }
-
 }
