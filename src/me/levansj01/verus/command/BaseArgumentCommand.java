@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.BiConsumer;
+
 import me.levansj01.verus.VerusPlugin;
 import me.levansj01.verus.command.BaseArgumentCommand;
 
@@ -51,4 +53,33 @@ public abstract class BaseArgumentCommand extends BaseCommand {
         this.arguments.put(commandArgument.argument, commandArgument);
     }
 
+}
+class CommandArgument {
+    protected final String argument;
+    protected final String description;
+    private final BiConsumer<CommandSender, String[]> consumer;
+    private String usage = "";
+
+    static String getUsage(CommandArgument commandArgument) {
+        return commandArgument.usage;
+    }
+
+    public CommandArgument(String string, String string2, BiConsumer<CommandSender, String[]> biConsumer) {
+        this.argument = string;
+        this.description = string2;
+        this.consumer = biConsumer;
+    }
+
+    public void run(CommandSender commandSender, String[] stringArray) {
+        if (this.consumer != null) {
+            this.consumer.accept(commandSender, stringArray);
+        }
+    }
+
+    public CommandArgument(String string, String string2, String string3, BiConsumer<CommandSender, String[]> biConsumer) {
+        this.argument = string;
+        this.description = string2;
+        this.usage = string3;
+        this.consumer = biConsumer;
+    }
 }
