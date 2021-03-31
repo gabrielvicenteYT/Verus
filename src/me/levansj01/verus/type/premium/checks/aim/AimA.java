@@ -11,7 +11,7 @@ public class AimA
 extends AimCheck {
     public void handle(PlayerLocation playerLocation, PlayerLocation playerLocation2, long l) {
         float f;
-        float f2 = Math.abs((float)(playerLocation.getYaw() - playerLocation2.getYaw()));
+        float f2 = Math.abs(playerLocation.getYaw() - playerLocation2.getYaw());
         if (f2 >= 1.0f && f2 % 0.1f == 0.0f) {
             if (f2 % 1.0f == 0.0f) {
                 this.violations += 1.0;
@@ -22,9 +22,9 @@ extends AimCheck {
             if (f2 % 30.0f == 0.0f) {
                 this.violations += 1.0;
             }
-            this.handleViolation(String.format((String)"Y: %s", (Object[])new Object[]{Float.valueOf((float)f2)}));
+            this.handleViolation(String.format("Y: %s", new Object[]{Float.valueOf(f2)}));
         }
-        if ((f = Math.abs((float)(playerLocation.getPitch() - playerLocation2.getPitch()))) >= 1.0f && f % 0.1f == 0.0f) {
+        if ((f = Math.abs(playerLocation.getPitch() - playerLocation2.getPitch())) >= 1.0f && f % 0.1f == 0.0f) {
             if (f % 1.0f == 0.0f) {
                 this.violations += 1.0;
             }
@@ -34,7 +34,7 @@ extends AimCheck {
             if (f % 30.0f == 0.0f) {
                 this.violations += 1.0;
             }
-            this.handleViolation(String.format((String)"P: %s", (Object[])new Object[]{Float.valueOf((float)f)}));
+            this.handleViolation(String.format("P: %s", new Object[]{Float.valueOf(f)}));
         }
     }
 }
