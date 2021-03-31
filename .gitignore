@@ -8,3 +8,5 @@
 #IntelliJ
 *.iml
 .idea/
+
+libs/Verus-output-deobf.jar

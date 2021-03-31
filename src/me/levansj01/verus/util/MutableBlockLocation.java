@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.material.MaterialData;
 
 public class MutableBlockLocation {
+
     private int z;
     private int y;
     private int x;
@@ -36,9 +37,12 @@ public class MutableBlockLocation {
     }
 
     public MutableBlockLocation andThen(Vector3d vector3d) {
-        this.x = (int) Math.floor((double) vector3d.getX());
-        this.y = (int) Math.floor((double) vector3d.getY());
-        this.z = (int) Math.floor((double) vector3d.getZ());
+        this.x = (int) Math.floor(vector3d.getX());
+        this.y = (int) Math.floor(vector3d.getY());
+        this.z = (int) Math.floor(vector3d.getZ());
+        this.x = (int)Math.floor(vector3d.getX());
+        this.y = (int)Math.floor(vector3d.getY());
+        this.z = (int)Math.floor(vector3d.getZ());
         return this;
     }
 
