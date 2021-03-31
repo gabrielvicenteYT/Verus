@@ -1,8 +1,6 @@
 package me.levansj01.verus.check.checks.badpackets;
 
-
 import me.levansj01.verus.alert.manager.AlertManager;
-import me.levansj01.verus.check.Check;
 import me.levansj01.verus.check.PacketCheck;
 import me.levansj01.verus.check.annotation.CheckInfo;
 import me.levansj01.verus.check.type.CheckType;
