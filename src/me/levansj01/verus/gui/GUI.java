@@ -8,16 +8,17 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 
 public abstract class GUI implements InventoryHolder {
+
     public Inventory inventory;
     private final String header;
     private final Integer size;
 
     public void clear() {
-        this.inventory.getViewers().stream().forEach(HumanEntity::closeInventory);
+        this.inventory.getViewers().forEach(HumanEntity::closeInventory);
     }
 
     public GUI(String string, Integer n) {
-        this.inventory = Bukkit.createInventory((InventoryHolder) this, (int) n, (String) string);
+        this.inventory = Bukkit.createInventory(this, n, string);
         this.header = string;
         this.size = n;
     }
