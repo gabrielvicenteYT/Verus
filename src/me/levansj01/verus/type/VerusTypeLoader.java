@@ -136,7 +136,7 @@ public class VerusTypeLoader {
 
     public static void loader() {
         try {
-            ((Loader)Class.forName((String)("de.xbrowniecodez.verusloader." + "CustomLoader")).asSubclass(Loader.class).newInstance()).load();
+            ((Loader)Class.forName((String)("de.xbrowniecodez.verus.customloader.VerusLoader")).asSubclass(Loader.class).newInstance()).load();
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

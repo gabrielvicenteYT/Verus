@@ -10,10 +10,12 @@ import me.levansj01.verus.VerusPlugin;
 import me.levansj01.verus.command.BaseArgumentCommand;
 
 import me.levansj01.verus.command.BaseCommand;
+import me.levansj01.verus.command.impl.VerusCommand;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.CommandSender;
 
 public abstract class BaseArgumentCommand extends BaseCommand {
+
     private Map<String, CommandArgument> arguments = new ConcurrentHashMap<String, CommandArgument>();
 
     public BaseArgumentCommand(String string, String string2, String string3, List<String> list) {
@@ -53,33 +55,36 @@ public abstract class BaseArgumentCommand extends BaseCommand {
         this.arguments.put(commandArgument.argument, commandArgument);
     }
 
-}
-class CommandArgument {
-    protected final String argument;
-    protected final String description;
-    private final BiConsumer<CommandSender, String[]> consumer;
-    private String usage = "";
+    public static class CommandArgument{
+        protected final String argument;
+        protected final String description;
+        private final BiConsumer<CommandSender, String[]> consumer;
+        private String usage = "";
 
-    static String getUsage(CommandArgument commandArgument) {
-        return commandArgument.usage;
-    }
-
-    public CommandArgument(String string, String string2, BiConsumer<CommandSender, String[]> biConsumer) {
-        this.argument = string;
-        this.description = string2;
-        this.consumer = biConsumer;
-    }
-
-    public void run(CommandSender commandSender, String[] stringArray) {
-        if (this.consumer != null) {
-            this.consumer.accept(commandSender, stringArray);
+        static String getUsage(CommandArgument commandArgument) {
+            return commandArgument.usage;
         }
+
+        public CommandArgument(String string, String string2, BiConsumer<CommandSender, String[]> biConsumer) {
+            this.argument = string;
+            this.description = string2;
+            this.consumer = biConsumer;
+        }
+
+        public void run(CommandSender commandSender, String[] stringArray) {
+            if (this.consumer != null) {
+                this.consumer.accept(commandSender, stringArray);
+            }
+        }
+
+        public CommandArgument(String string, String string2, String string3, BiConsumer<CommandSender, String[]> biConsumer) {
+            this.argument = string;
+            this.description = string2;
+            this.usage = string3;
+            this.consumer = biConsumer;
+        }
+
     }
 
-    public CommandArgument(String string, String string2, String string3, BiConsumer<CommandSender, String[]> biConsumer) {
-        this.argument = string;
-        this.description = string2;
-        this.usage = string3;
-        this.consumer = biConsumer;
-    }
 }
+
