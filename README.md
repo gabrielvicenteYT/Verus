@@ -1,7 +1,7 @@
 # Verus-AntiCheat-SourceCode
 !!WORK IN PROGRESS!!
 
-#Important To-Do
+# Important To-Do
 - Fixup VerusTypeLoader class (Prob recode it)
 
 # Credits
