@@ -23,20 +23,20 @@ public class FlyB
     private int threshold;
 
     public void handle(PlayerLocation playerLocation, PlayerLocation playerLocation2, long l) {
-        if (!(!playerLocation.getGround().booleanValue() || !playerLocation2.getGround().booleanValue() || playerLocation.getY() == playerLocation2.getY() || MathUtil.onGround(playerLocation.getY()) || this.playerData.getTotalTicks() <= 200 || MathUtil.onGround(playerLocation2.getY()) || !this.playerData.isSpawned() || this.playerData.getTotalTicks() - 10 <= this.lastBypassTick || this.playerData.canFly() || this.playerData.isFallFlying() || this.playerData.isGliding() || this.playerData.isLevitating() || this.playerData.isFlying() || this.playerData.hasJumpBoostExpired())) {
+        if (!(!playerLocation.getGround() || !playerLocation2.getGround() || playerLocation.getY() == playerLocation2.getY() || MathUtil.onGround(playerLocation.getY()) || this.playerData.getTotalTicks() <= 200 || MathUtil.onGround(playerLocation2.getY()) || !this.playerData.isSpawned() || this.playerData.getTotalTicks() - 10 <= this.lastBypassTick || this.playerData.canFly() || this.playerData.isFallFlying() || this.playerData.isGliding() || this.playerData.isLevitating() || this.playerData.isFlying() || this.playerData.hasJumpBoostExpired())) {
             World world = this.player.getWorld();
             Cuboid cuboid = new Cuboid(this.playerData.getLocation()).expand(0.5, 0.5, 0.5);
             double d = playerLocation2.getY() - playerLocation.getY();
             int n = this.playerData.getTotalTicks();
-            this.run(() -> this.lambda$handle$1(cuboid, world, n, d));
+            this.run(() -> this.handle(cuboid, world, n, d));
         } else {
             this.threshold = 0;
             this.violations -= Math.min(this.violations + 4.0, 0.05);
         }
     }
 
-    private void lambda$handle$1(Cuboid cuboid, World world, int n, double d) {
-        if (cuboid.checkBlocks(this.player, world, FlyB::lambda$null$0)) {
+    private void handle(Cuboid cuboid, World world, int n, double d) {
+        if (cuboid.checkBlocks(this.player, world, FlyB::isNull)) {
             for (Entity entity : this.player.getNearbyEntities(2.5, 2.5, 2.5)) {
                 if (entity instanceof Boat || entity instanceof Minecart || entity.getType().name().equalsIgnoreCase("SHULKER")) {
                     this.threshold = 0;
@@ -55,7 +55,7 @@ public class FlyB
         }
     }
 
-    private static boolean lambda$null$0(Material material) {
+    private static boolean isNull(Material material) {
         boolean bl;
         bl = (NMSManager.getInstance().getServerVersion().before(ServerVersion.v1_11_R1) || material != MaterialList.PURPLE_FUCKING_SHULKER) && !MaterialList.INVALID_SHAPE.contains(material);
         return bl;

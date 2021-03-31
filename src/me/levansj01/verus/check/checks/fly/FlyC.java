@@ -40,7 +40,7 @@ public class FlyC
         }
     }
 
-    private void lambda$handle$2() {
+    private void handle2() {
         this.threshold = 0;
         this.decreaseVL(0.01);
     }
@@ -72,7 +72,7 @@ public class FlyC
                     double finalD = d;
                     this.run(() -> this.handle(cuboid, world, bl2, finalD, n));
                 } else {
-                    this.run(this::lambda$handle$2);
+                    this.run(this::handle2);
                 }
             }
             if (vPacketPlayInFlying.isPos()) {
