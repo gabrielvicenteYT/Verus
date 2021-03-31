@@ -15,63 +15,51 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class CheckGUI extends GUI {
+    private Map<Integer, CheckType> checksById = new ConcurrentHashMap<Integer, CheckType>();
 
-   private Map<Integer, CheckType> checksById = new ConcurrentHashMap<>();
+    public void clear() {
+        super.clear();
+        this.checksById = null;
+    }
 
-   public void clear() {
-      super.clear();
-      this.checksById = null;
-   }
+    public void onClick(InventoryClickEvent inventoryClickEvent) {
+        String string;
+        CheckType checkType;
+        int n = inventoryClickEvent.getSlot();
+        if (n >= 0 && n < 9) {
+            GUIManager.getInstance().getMainGui().openGui((Player) inventoryClickEvent.getWhoClicked());
+            return;
+        }
+        ItemStack itemStack = inventoryClickEvent.getCurrentItem();
+        if (itemStack != null && itemStack.getItemMeta() != null
+                && (checkType = (CheckType) this.checksById.get((Object) n)) != null
+                && (string = ChatColor.stripColor((String) itemStack.getItemMeta().getDisplayName()
+                        .replace((CharSequence) " Checks", (CharSequence) ""))).equalsIgnoreCase(checkType.getName())) {
+            GUIManager.getInstance().getTypeGui(checkType).openGui((Player) inventoryClickEvent.getWhoClicked());
+        }
+    }
 
-   public void onClick(InventoryClickEvent var1) {
-      int var2 = var1.getSlot();
-      if (var2 >= 0 && var2 < 9) {
-         GUIManager.getInstance().getMainGui().openGui((Player)var1.getWhoClicked());
-      } else {
-         ItemStack var3 = var1.getCurrentItem();
-         if (var3 != null && var3.getItemMeta() != null) {
-            CheckType var4 = (CheckType)this.checksById.get(var2);
-            if (var4 != null) {
-               String var5 = ChatColor.stripColor(var3.getItemMeta().getDisplayName().replace(" Checks", ""));
-               if (var5.equalsIgnoreCase(var4.getName())) {
-                  GUIManager.getInstance().getTypeGui(var4).openGui((Player)var1.getWhoClicked());
-               }
+    public CheckGUI() {
+        super(VerusPlugin.COLOR + VerusPlugin.getNameFormatted() + " Checks", Integer.valueOf((int) 45));
+        int n = 0;
+        if (n < 9) {
+            this.inventory.setItem(n, new ItemBuilder().setType(MaterialList.STAINED_GLASS_PANE)
+                    .setName(ChatColor.RED + "Previous Page").setAmount(1)
+                    .setLore(Arrays.asList(new String[] { ChatColor.GRAY + "Click to go back a page" })).build());
+            ++n;
+        }
+        n = 9;
+        for (CheckType checkType : CheckType.values()) {
+            if (checkType == CheckType.MANUAL) {
+
             }
-         }
-
-      }
-   }
-
-   public CheckGUI() {
-      super(VerusPlugin.COLOR + VerusPlugin.getNameFormatted() + " Checks", 45);
-      int var1 = 0;
-
-      do {
-         if (var1 >= 9) {
-            var1 = 9;
-            CheckType[] var2 = CheckType.values();
-            int var3 = var2.length;
-            int var4 = 0;
-
-            do {
-               if (var4 >= var3) {
-                  return;
-               }
-
-               CheckType var5 = var2[var4];
-               if (var5 == CheckType.MANUAL) {
-               } else {
-                  this.inventory.setItem(var1, (new ItemBuilder()).setType(MaterialList.DIAMOND_SWORD).setName(VerusPlugin.COLOR + var5.getName() + " Checks").setLore(Arrays.asList(VerusPlugin.COLOR + "ID: " + ChatColor.WHITE + var5.getSuffix())).setAmount(1).build());
-                  this.checksById.put(var1, var5);
-                  ++var1;
-               }
-
-               ++var4;
-            } while(true);
-         }
-
-         this.inventory.setItem(var1, (new ItemBuilder()).setType(MaterialList.STAINED_GLASS_PANE).setName(ChatColor.RED + "Previous Page").setAmount(1).setLore(Arrays.asList(ChatColor.GRAY + "Click to go back a page")).build());
-         ++var1;
-      } while(true);
-   }
+            this.inventory.setItem(n, new ItemBuilder().setType(MaterialList.DIAMOND_SWORD)
+                    .setName(VerusPlugin.COLOR + checkType.getName() + " Checks")
+                    .setLore(Arrays.asList(
+                            new String[] { VerusPlugin.COLOR + "ID: " + ChatColor.WHITE + checkType.getSuffix() }))
+                    .setAmount(1).build());
+            this.checksById.put(n, checkType);
+            ++n;
+        }
+    }
 }
