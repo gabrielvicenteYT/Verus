@@ -6,9 +6,8 @@ import me.levansj01.verus.check.type.CheckType;
 import me.levansj01.verus.check.version.CheckVersion;
 import me.levansj01.verus.util.PlayerLocation;
 
-@CheckInfo(type=CheckType.AIM_ASSIST, subType="A", friendlyName="Aimbot", version=CheckVersion.RELEASE, maxViolations=5, logData=true)
-public class AimA
-extends AimCheck {
+@CheckInfo(type = CheckType.AIM_ASSIST, subType = "A", friendlyName = "Aimbot", version = CheckVersion.RELEASE, maxViolations = 5, logData = true)
+public class AimA extends AimCheck {
     public void handle(PlayerLocation playerLocation, PlayerLocation playerLocation2, long l) {
         float f;
         float f2 = Math.abs(playerLocation.getYaw() - playerLocation2.getYaw());
@@ -22,7 +21,7 @@ extends AimCheck {
             if (f2 % 30.0f == 0.0f) {
                 this.violations += 1.0;
             }
-            this.handleViolation(String.format("Y: %s", new Object[]{Float.valueOf(f2)}));
+            this.handleViolation(String.format("Y: %s", new Object[] { Float.valueOf(f2) }));
         }
         if ((f = Math.abs(playerLocation.getPitch() - playerLocation2.getPitch())) >= 1.0f && f % 0.1f == 0.0f) {
             if (f % 1.0f == 0.0f) {
@@ -34,7 +33,7 @@ extends AimCheck {
             if (f % 30.0f == 0.0f) {
                 this.violations += 1.0;
             }
-            this.handleViolation(String.format("P: %s", new Object[]{Float.valueOf(f)}));
+            this.handleViolation(String.format("P: %s", new Object[] { Float.valueOf(f) }));
         }
     }
 }
