@@ -52,7 +52,7 @@ public abstract class API {
                 Plugin plugin = API.fetchPlugin();
                 String string = plugin.getDescription().getVersion();
                 try {
-                    api = (API)Class.forName((String)("me.levansj01.verus.api.impl.API" + string.replace((CharSequence)".", (CharSequence)"_"))).asSubclass(API.class).newInstance();
+                    api = Class.forName("me.levansj01.verus.api.impl.API" + string.replace(".", "_")).asSubclass(API.class).newInstance();
                 } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
