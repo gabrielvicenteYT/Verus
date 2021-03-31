@@ -7,4 +7,5 @@
 
 # Credits
 - brownie (Cracking, Dumping, Deobfuscating, Fixing decompiled code)
+- FlyCode (Cleanup, Fixing decompiled code)
 - Newb (Fixing decompiled code)
