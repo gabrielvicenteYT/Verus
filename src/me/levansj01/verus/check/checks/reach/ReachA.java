@@ -26,8 +26,8 @@ public class ReachA extends ReachCheck {
             this.lastFlag = l;
             this.handleViolation(
                     String.format("R: %.2f H: %.2f V: %.2f E: %.2f S: %s C: %.2f P: %s",
-                            new Object[] { d, d4, d3, d2, reachBase.getDistanceList().size(), reachBase.getCertainty(),
-                                    this.playerData.getTransactionPing() }),
+                            d, d4, d3, d2, reachBase.getDistanceList().size(), reachBase.getCertainty(),
+                            this.playerData.getTransactionPing()),
                     Math.min(d, 4.5) - 3.0 + reachBase.getCertainty());
         } else {
             this.violations -= Math.min(this.violations + 1.5, 0.005);
