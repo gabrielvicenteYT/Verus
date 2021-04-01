@@ -1,7 +1,8 @@
 package me.levansj01.verus.util;
 
-public class PacketLocation {
+import me.levansj01.verus.util.Cuboid;
 
+public class PacketLocation {
     private long nextOffset;
     protected double x;
     protected double z;
@@ -65,13 +66,13 @@ public class PacketLocation {
         if (this.getNextOffset() != packetLocation.getNextOffset()) {
             return false;
         }
-        if (Double.compare(this.getX(), packetLocation.getX()) != 0) {
+        if (Double.compare((double)this.getX(), (double)packetLocation.getX()) != 0) {
             return false;
         }
-        if (Double.compare(this.getY(), packetLocation.getY()) != 0) {
+        if (Double.compare((double)this.getY(), (double)packetLocation.getY()) != 0) {
             return false;
         }
-        return Double.compare(this.getZ(), packetLocation.getZ()) == 0;
+        return Double.compare((double)this.getZ(), (double)packetLocation.getZ()) == 0;
     }
 
     public long getNextOffset() {
@@ -89,11 +90,11 @@ public class PacketLocation {
         n2 = n2 * 59 + (int)(l >>> 32 ^ l);
         long l2 = this.getNextOffset();
         n2 = n2 * 59 + (int)(l2 >>> 32 ^ l2);
-        long l3 = Double.doubleToLongBits(this.getX());
+        long l3 = Double.doubleToLongBits((double)this.getX());
         n2 = n2 * 59 + (int)(l3 >>> 32 ^ l3);
-        long l4 = Double.doubleToLongBits(this.getY());
+        long l4 = Double.doubleToLongBits((double)this.getY());
         n2 = n2 * 59 + (int)(l4 >>> 32 ^ l4);
-        long l5 = Double.doubleToLongBits(this.getZ());
+        long l5 = Double.doubleToLongBits((double)this.getZ());
         n2 = n2 * 59 + (int)(l5 >>> 32 ^ l5);
         return n2;
     }
@@ -118,4 +119,3 @@ public class PacketLocation {
         return new PacketLocation(this.timestamp, this.nextOffset, this.x, this.y, this.z);
     }
 }
-

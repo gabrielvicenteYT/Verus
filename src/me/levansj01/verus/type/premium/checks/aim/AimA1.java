@@ -16,8 +16,8 @@ public class AimA1 extends AimCheck {
             int n;
             float f = Math.abs(playerLocation.getYaw() - playerLocation2.getYaw());
             if (f > 1.0f && (n = Math.round(f)) == f) {
-                if (Objects.equals(Float.valueOf(f), Float.valueOf((float) this.lastYawChange))) {
-                    this.handleViolation(String.format("Y: %s", new Object[] { Float.valueOf((float) f) }));
+                if (Objects.equals(f, this.lastYawChange)) {
+                    this.handleViolation(String.format("Y: %s", f));
                 }
                 this.lastYawChange = n;
             }

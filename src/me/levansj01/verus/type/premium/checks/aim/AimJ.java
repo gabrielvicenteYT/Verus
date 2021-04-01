@@ -12,7 +12,7 @@ public class AimJ extends AimCheck {
         if (this.playerData.getLastAttackTicks() < 200) {
             if (f2 > 0.0f && f > 2.0f && (double) f2 < 0.0119) {
                 this.handleViolation(
-                        String.format("Y: %s P: %s", new Object[] { Float.valueOf(f), Float.valueOf(f2) }));
+                        String.format("Y: %s P: %s", f, f2));
             }
             this.violations -= Math.min(this.violations + 2.0, 0.001);
         }

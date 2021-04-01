@@ -32,7 +32,7 @@ public class ServerTickTask implements Runnable {
     }
 
     public void schedule() {
-        this.bukkitTask = Bukkit.getScheduler().runTaskTimer((Plugin)VerusLauncher.getPlugin(), (Runnable)this, 1L, 1L);
+        this.bukkitTask = Bukkit.getScheduler().runTaskTimer(VerusLauncher.getPlugin(), this, 1L, 1L);
     }
 
     public static ServerTickTask getInstance() {

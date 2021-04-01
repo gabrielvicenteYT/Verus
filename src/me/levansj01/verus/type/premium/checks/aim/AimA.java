@@ -21,7 +21,7 @@ public class AimA extends AimCheck {
             if (f2 % 30.0f == 0.0f) {
                 this.violations += 1.0;
             }
-            this.handleViolation(String.format("Y: %s", new Object[] { Float.valueOf(f2) }));
+            this.handleViolation(String.format("Y: %s", f2));
         }
         if ((f = Math.abs(playerLocation.getPitch() - playerLocation2.getPitch())) >= 1.0f && f % 0.1f == 0.0f) {
             if (f % 1.0f == 0.0f) {
@@ -33,7 +33,7 @@ public class AimA extends AimCheck {
             if (f % 30.0f == 0.0f) {
                 this.violations += 1.0;
             }
-            this.handleViolation(String.format("P: %s", new Object[] { Float.valueOf(f) }));
+            this.handleViolation(String.format("P: %s", f));
         }
     }
 }

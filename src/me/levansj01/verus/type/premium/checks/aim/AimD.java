@@ -13,7 +13,7 @@ public class AimD extends AimCheck {
         float f = Math.abs(playerLocation2.getYaw() - playerLocation.getYaw());
         float f2 = Math.abs(playerLocation2.getPitch() - playerLocation.getPitch());
         if (f2 > 0.0f && f2 < 1.0E-5 && f > 5.0f) {
-            this.handleViolation(String.format("Y: %s P: %s", new Object[] { Float.valueOf(f), Float.valueOf(f2) }));
+            this.handleViolation(String.format("Y: %s P: %s", f, f2));
         }
         this.violations -= Math.min(this.violations + 1.0, 0.005);
     }
