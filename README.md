@@ -7,7 +7,7 @@ There is still shit to be done, but most stuff is there already.
 # Why are you doing this?
 I'm doing this because i won't watch how they continue scamming their customer. So you have 3 options,
 - Shutdown Verus
-- Ignore this
+- Ignore this (and I won't stop)
 - Pay me 350$ to stop this.
 
 ## Important To-Do
