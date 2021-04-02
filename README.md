@@ -1,4 +1,4 @@
-# Verus-AntiCheat-SourceCode
+# Verus AntiCheat SourceCode (VOSP) Verus-Open-Source-Project
 !!WORK IN PROGRESS!!
 
 There is still shit to be done, but most stuff is there already.
