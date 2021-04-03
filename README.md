@@ -45,7 +45,7 @@ Verus is a complete scam. There's absolutely no way to deny this. In this reposi
 ## Important To-Do
 - ~~Fixup VerusTypeLoader class (Prob recode it)~~
 - Check base command classes again.
-- Check KillauraQ (Premium Check) again
+- ~~Check KillauraQ (Premium Check) again
 
 ## Credits
 - brownie (Cracking, Dumping, Deobfuscating, Fixing decompiled code)
