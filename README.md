@@ -27,7 +27,7 @@ Verus is a complete scam. There's absolutely no way to deny this. In this reposi
 ### Lies & Misleading information
 
   Sources:
-    - Verus MCM thraed
+    - Verus MCM thread
     - https://imgur.com/a/QYIKVzz - Used to be on Verus's thread
 
   - In their MCM thread, they claim to offer "Priority support via discord and/or telegram". This is completely untrue, as one of the most common complains on the MC-Market thread is the total lack of support.
