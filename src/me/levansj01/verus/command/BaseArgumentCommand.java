@@ -1,6 +1,5 @@
 package me.levansj01.verus.command;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -10,80 +9,76 @@ import me.levansj01.verus.VerusPlugin;
 import me.levansj01.verus.command.BaseArgumentCommand;
 
 import me.levansj01.verus.command.BaseCommand;
-import me.levansj01.verus.command.impl.VerusCommand;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.CommandSender;
 
-public abstract class BaseArgumentCommand extends BaseCommand {
-
-    private Map<String, CommandArgument> arguments = new ConcurrentHashMap<String, CommandArgument>();
-
-    public BaseArgumentCommand(String string, String string2, String string3, List<String> list) {
-        super(string, string2, string3, list);
+public abstract class BaseArgumentCommand extends BaseCommand
+{
+    private Map<String, CommandArgument> arguments;
+    
+    public BaseArgumentCommand(final String s, final String s2, final String s3, final List<String> list) {
+        super(s, s2, s3, list);
+        this.arguments = new ConcurrentHashMap<String, CommandArgument>();
     }
-
-    public void execute(CommandSender commandSender, String[] stringArray) {
-        if (stringArray.length == 0) {
+    
+    public BaseArgumentCommand(final String s) {
+        super(s);
+        this.arguments = new ConcurrentHashMap<String, CommandArgument>();
+    }
+    
+    @Override
+    public void execute(final CommandSender commandSender, final String[] array) {
+        if (array.length == 0) {
             this.sendHelp(commandSender);
             return;
         }
-        CommandArgument commandArgument = (CommandArgument) this.arguments.get((Object) stringArray[0]);
+        final CommandArgument commandArgument = this.arguments.get(array[0]);
         if (commandArgument == null) {
             this.sendHelp(commandSender);
             return;
         }
-        commandArgument.run(commandSender, stringArray);
+        commandArgument.run(commandSender, array);
     }
-
-    public BaseArgumentCommand(String string) {
-        super(string);
-    }
-
-    protected void sendHelp(CommandSender commandSender) {
-        String string = VerusPlugin.COLOR + "Help Command for /" + this.getName() + ":\n";
-        Iterator<CommandArgument> iterator = this.arguments.values().iterator();
-        if (iterator.hasNext()) {
-            CommandArgument commandArgument = iterator.next();
-            string = string + String.format((ChatColor.GRAY + "- " + VerusPlugin.COLOR + "/%s %s %s: %s\n"),
-                    new Object[] { this.getName(), commandArgument.argument, CommandArgument.getUsage(commandArgument),
-                            ChatColor.WHITE + commandArgument.description });
-        }
-        commandSender.sendMessage(string);
-    }
-
-    protected void addArgument(CommandArgument commandArgument) {
+    
+    protected void addArgument(final CommandArgument commandArgument) {
         this.arguments.put(commandArgument.argument, commandArgument);
     }
-
-    public static class CommandArgument{
-        protected final String argument;
+    
+    protected void sendHelp(final CommandSender commandSender) {
+        final StringBuilder s = new StringBuilder(VerusPlugin.COLOR + "Help Command for /" + this.getName() + ":\n");
+        for (final CommandArgument commandArgument : this.arguments.values()) {
+            s.append(String.format(ChatColor.GRAY + "- " + VerusPlugin.COLOR + "/%s %s %s: %s\n", this.getName(), commandArgument.argument, commandArgument.usage, ChatColor.WHITE + commandArgument.description));
+        }
+        commandSender.sendMessage(s.toString());
+    }
+    
+    public class CommandArgument
+    {
         protected final String description;
+        protected final String argument;
         private final BiConsumer<CommandSender, String[]> consumer;
-        private String usage = "";
-
-        static String getUsage(CommandArgument commandArgument) {
-            return commandArgument.usage;
+        private String usage;
+        
+        public CommandArgument(final String argument, final String description, final String usage, final BiConsumer<CommandSender, String[]> consumer) {
+            this.usage = "";
+            this.argument = argument;
+            this.description = description;
+            this.usage = usage;
+            this.consumer = consumer;
         }
-
-        public CommandArgument(String string, String string2, BiConsumer<CommandSender, String[]> biConsumer) {
-            this.argument = string;
-            this.description = string2;
-            this.consumer = biConsumer;
+        
+        public CommandArgument(final String argument, final String description, final BiConsumer<CommandSender, String[]> consumer) {
+            this.usage = "";
+            this.argument = argument;
+            this.description = description;
+            this.consumer = consumer;
         }
-
-        public void run(CommandSender commandSender, String[] stringArray) {
+        
+        public void run(final CommandSender commandSender, final String[] array) {
             if (this.consumer != null) {
-                this.consumer.accept(commandSender, stringArray);
+                this.consumer.accept(commandSender, array);
             }
         }
-
-        public CommandArgument(String string, String string2, String string3, BiConsumer<CommandSender, String[]> biConsumer) {
-            this.argument = string;
-            this.description = string2;
-            this.usage = string3;
-            this.consumer = biConsumer;
-        }
-
     }
 
 }
