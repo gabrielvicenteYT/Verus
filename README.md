@@ -15,15 +15,15 @@ Verus is a complete scam. There's absolutely no way to deny this. In this reposi
 
 # Why Verus is a scam
 
-### GroundSpoof
-  - Toggle GroundSpoof and set your motionY to zero. You can fly at base move speed. For an AntiCheat of this price, this is absolutely unacceptable. I was able to replicate this with success using Wurst client.
-
 ### Infrequent Updates
   - Verus lacks updates, severely. When it does update, critical issues are not fixed. Verus updated days ago, after around 3 and a half months of being completely MIA.
 
 ### Poorly written checks
   - Frequently, client developers are able to find blazing fast flies, disablers, speeds, and FastBows. These are not typically patched, as the Verus developers have absolutely no idea what they are doing in terms of AntiCheat development. If you're here to paste some of Verus's code, you'll be subject to the same issues they have.
 
+### False claims
+  - Listed below
+ 
 ### Lies & Misleading information
 
   Sources:
