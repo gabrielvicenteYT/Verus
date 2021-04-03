@@ -19,10 +19,9 @@ import org.bukkit.command.Command;
 
 public class VerusTypeLoader {
     private List<Class<? extends Check>> checkClasses = null;
-    public static final List<String> BETA_USERNAMES;
+    public static final List<String> BETA_USERNAMES = Arrays.asList(new String[] { "UniversoCraft", "PGxPO", "Axon", "Test" });
     private List<Class<?>> classes = null;
-    private static final VerusType verusType;
-    private static Class<?>[] _classLoaded;
+    private static final VerusType verusType = VerusType.values()[VerusPlugin.getType()];
 
     public void setCheckClasses(List<Class<? extends Check>> list) {
         this.checkClasses = list;
@@ -30,24 +29,25 @@ public class VerusTypeLoader {
 
     private synchronized List<Class<? extends Check>> getCheckClasses() {
         if (this.checkClasses == null) {
-            this.checkClasses = new ArrayList();
-            for (Class clazz : this.getClassInfos()) {
-                Class clazz2 = null;
-                if (Check.class.isAssignableFrom(clazz) && !Modifier.isAbstract((int)clazz.getModifiers())) {
-                    clazz2 = clazz.asSubclass(Check.class);
-                    Check check = null;
-                    try {
-                        check = (Check)clazz2.newInstance();
-                    } catch (InstantiationException | IllegalAccessException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
+            this.checkClasses = new ArrayList<Class<? extends Check>>();
+            for (final Class<?> clazz : this.getClassInfos()) {
+                try {
+                    if (!Check.class.isAssignableFrom(clazz) || Modifier.isAbstract(clazz.getModifiers())) {
+                        continue;
                     }
-                    if (verusType.getTypes().contains((Object)check.getCheckVersion()) && !check.getUnsupportedServers().contains((Object)NMSManager.getInstance().getServerVersion())) {
-                        this.checkClasses.add((Class<? extends Check>)clazz2);
+                    final Class<? extends Check> subclass = clazz.asSubclass(Check.class);
+                    final Check check = (Check) subclass.newInstance();
+                    if ((!VerusTypeLoader.verusType.getTypes().contains(check.getCheckVersion())
+                            || check.getUnsupportedServers().contains(NMSManager.getInstance().getServerVersion()))) {
+                        continue;
                     }
-                }
-                if (VerusTypeLoader.isDev()) {
-                    VerusLauncher.getPlugin().getLogger().log(Level.WARNING, "Failed to load " + clazz.getName() + ": ", clazz2);
+                    this.checkClasses.add(subclass);
+                } catch (Throwable t) {
+                    if (!isDev()) {
+                        continue;
+                    }
+                    VerusLauncher.getPlugin().getLogger().log(Level.WARNING, "Failed to load " + clazz.getName() + ": ",
+                            t);
                 }
             }
         }
@@ -55,16 +55,14 @@ public class VerusTypeLoader {
     }
 
     public List<Check> loadChecks() {
-        ArrayList arrayList = new ArrayList();
-        for (Class clazz : this.getCheckClasses()) {
+        final ArrayList<Check> list = new ArrayList<Check>();
+        for (final Class<? extends Check> clazz : this.getCheckClasses()) {
             try {
-                arrayList.add(clazz.newInstance());
-            } catch (InstantiationException | IllegalAccessException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                list.add((Check) clazz.newInstance());
+            } catch (Throwable t) {
             }
         }
-        return arrayList;
+        return list;
     }
 
     public void setClasses(List<Class<?>> list) {
@@ -76,18 +74,16 @@ public class VerusTypeLoader {
     }
 
     public List<Command> getCommands() {
-        ArrayList arrayList = new ArrayList();
-        for (Class clazz : this.getClassInfos()) {
-            if (Command.class.isAssignableFrom(clazz) && !Modifier.isAbstract((int)clazz.getModifiers())) {
+        final ArrayList<Command> list = new ArrayList<Command>();
+        for (final Class<?> clazz : this.getClassInfos()) {
+            if (Command.class.isAssignableFrom(clazz) && !Modifier.isAbstract(clazz.getModifiers())) {
                 try {
-                    arrayList.add(clazz.asSubclass(Command.class).newInstance());
-                } catch (InstantiationException | IllegalAccessException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    list.add((Command) clazz.asSubclass(Command.class).newInstance());
+                } catch (Throwable t) {
                 }
             }
         }
-        return arrayList;
+        return list;
     }
 
     public static boolean isDev() {
@@ -103,40 +99,34 @@ public class VerusTypeLoader {
 
     private List<Class<?>> getClassInfos() {
         if (this.classes == null) {
-            ClassLoader classLoader = this.getClass().getClassLoader();
-            Vector vector = (Vector)SafeReflection.getLocalField(ClassLoader.class, (Object)classLoader, (String)"classes");
-            this.classes = new ArrayList((Collection)vector);
-
-            _classLoaded = null;
+            final ClassLoader classLoader = this.getClass().getClassLoader();
+            this.classes = new ArrayList<Class<?>>(
+                    SafeReflection.getLocalField(ClassLoader.class, classLoader, "classes"));
         }
         return this.classes;
     }
 
-    static {
-        _classLoaded = null;
-        verusType = VerusType.values()[VerusPlugin.getType()];
-        BETA_USERNAMES = Arrays.asList(new String[]{"UniversoCraft", "PGxPO", "Axon", "Test"});
-    }
-
     public List<BaseCommand> getBaseCommands() {
-        ArrayList arrayList = new ArrayList();
-        for (Class clazz : this.getClassInfos()) {
-            if (BaseCommand.class.isAssignableFrom(clazz) && !Modifier.isAbstract((int)clazz.getModifiers())) {
+        final ArrayList<BaseCommand> list = new ArrayList<BaseCommand>();
+        for (final Class<?> clazz : this.getClassInfos()) {
+            if (BaseCommand.class.isAssignableFrom(clazz) && !Modifier.isAbstract(clazz.getModifiers())) {
                 try {
-                    arrayList.add(clazz.asSubclass(BaseCommand.class).newInstance());
-                } catch (InstantiationException | IllegalAccessException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    list.add((BaseCommand) clazz.asSubclass(BaseCommand.class).newInstance());
+                } catch (Throwable t) {
+                    if (!isDev()) {
+                        continue;
+                    }
+                    t.printStackTrace();
                 }
-
             }
         }
-        return arrayList;
+        return list;
     }
 
     public static void loader() {
         try {
-            ((Loader)Class.forName((String)("de.xbrowniecodez.verus.customloader.VerusLoader")).asSubclass(Loader.class).newInstance()).load();
+            ((Loader) Class.forName((String) ("de.xbrowniecodez.verus.customloader.VerusLoader"))
+                    .asSubclass(Loader.class).newInstance()).load();
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
