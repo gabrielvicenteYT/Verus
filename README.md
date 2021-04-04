@@ -6,7 +6,7 @@ There is still shit to be done, but most stuff is there already.
 
 # Why are you doing this?
 I'm doing this because i won't watch how they continue scamming their customer. So you have 3 options,
-- Shutdown Verus
+- Shut Verus down
 - Ignore this (and I won't stop)
 - Pay me 350$ to stop this.
 
@@ -16,7 +16,7 @@ Verus is a complete scam. There's absolutely no way to deny this. In this reposi
 # Why Verus is a scam
 
 ### Infrequent Updates
-  - Verus lacks updates, severely. When it does update, critical issues are not fixed. Verus updated days ago, after around 3 and a half months of being completely MIA.
+  - Verus lacks updates, severely. When it does update, critical issues are not fixed, exploits are not patched, and the plugin is as bad as ever. Verus updated days ago, after around 3 and a half months of being completely MIA. This was only due to the encouragement of a good friend of mine, Aidan, and had been worked on for less than a day. This is proven given the content of the updates - minor fixes and a performance increase. There was absolutely nothing done to patch the critical issues in Verus.
 
 ### Poorly written checks
   - Frequently, client developers are able to find blazing fast flies, disablers, speeds, and FastBows. These are not typically patched, as the Verus developers have absolutely no idea what they are doing in terms of AntiCheat development. If you're here to paste some of Verus's code, you'll be subject to the same issues they have.
