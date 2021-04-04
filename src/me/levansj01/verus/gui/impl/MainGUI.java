@@ -48,23 +48,25 @@ public class MainGUI extends GUI {
         HumanEntity humanEntity = inventoryClickEvent.getWhoClicked();
         if (humanEntity instanceof Player) {
             Player player = (Player) humanEntity;
-            if (clickedSlot == 0) {
-                if (ALLOWED_UUIDS.contains(player.getUniqueId())
-                        || player.getName().equals("Quantise") || player.getName().equals("Cupo")) {
-                    PlayerData playerData = DataManager.getInstance().getPlayer(player);
-                    playerData.setDebug(!playerData.isDebug());
-                    BukkitUtil.setMeta(player, "verus.admin", playerData.isDebug());
-                    StringBuilder stringBuilder = new StringBuilder().append(VerusPlugin.COLOR)
-                            .append("You are " + playerData.isDebug() ? "now" : "no longer");
-                    player.sendMessage(stringBuilder.append(" in debug mode").toString());
-
-                }
-            } else if (clickedSlot == 11) {
-                GUIManager.getInstance().getCheckGui().openGui(player);
-            } else if (clickedSlot == 13) {
-                this.updateInfoStack();
-            } else if (clickedSlot == 15 && BukkitUtil.hasPermission(humanEntity, "verus.restart")) {
-                PacketManager.getInstance().postToMainThread(VerusPlugin::restart);
+            switch (clickedSlot) {
+                case 0:
+                    if (ALLOWED_UUIDS.contains(player.getUniqueId()) || player.getName().equals("Quantise") || player.getName().equals("Cupo")) {
+                        PlayerData playerData = DataManager.getInstance().getPlayer(player);
+                        playerData.setDebug(!playerData.isDebug());
+                        BukkitUtil.setMeta(player, "verus.admin", playerData.isDebug());
+                        StringBuilder stringBuilder = new StringBuilder().append(VerusPlugin.COLOR).append("You are " + playerData.isDebug() ? "now" : "no longer");
+                        player.sendMessage(stringBuilder.append(" in debug mode").toString());
+                    }
+                    break;
+                case 11:
+                    GUIManager.getInstance().getCheckGui().openGui(player);
+                    break;
+                case 13:
+                    this.updateInfoStack();
+                    break;
+                case 15:
+                    if(BukkitUtil.hasPermission(humanEntity, "verus.restart")) PacketManager.getInstance().postToMainThread(VerusPlugin::restart);
+                    break;
             }
         }
     }
@@ -74,15 +76,9 @@ public class MainGUI extends GUI {
         for (int i = 0; i < this.inventory.getSize(); ++i) {
             this.inventory.setItem(i, blank);
         }
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add(" ");
-        for (CheckType checkType : CheckType.values()) {
-            arrayList.add(ChatColor.WHITE + checkType.getName() + ChatColor.GRAY + " (ID: " + checkType.getSuffix() + ")");
-        }
-        arrayList.add(" ");
-        arrayList.add(ChatColor.GRAY + "Click to open Checks menu");
+
         this.inventory.setItem(11, new ItemBuilder(MaterialList.BOOK).setName(VerusPlugin.COLOR + "Checks")
-                .setLore(arrayList).setAmount(CheckType.values().length - 1).build());
+                .setLore(getChecksLore()).setAmount(CheckType.values().length - 1).build());
         this.updateInfoStack();
         this.inventory.setItem(15,
                 (new ItemBuilder(MaterialList.REDSTONE)).setName(VerusPlugin.COLOR + "Restart")
@@ -109,5 +105,16 @@ public class MainGUI extends GUI {
                 ChatColor.GRAY + "Click to Refresh"));
         infoStack.setItemMeta(itemMeta);
         this.inventory.setItem(13, infoStack);
+    }
+
+    private List<String> getChecksLore() {
+        ArrayList<String> checks = new ArrayList<>();
+        checks.add(" ");
+        for (CheckType checkType : CheckType.values()) {
+            checks.add(ChatColor.WHITE + checkType.getName() + ChatColor.GRAY + " (ID: " + checkType.getSuffix() + ")");
+        }
+        checks.add(" ");
+        checks.add(ChatColor.GRAY + "Click to open Checks menu");
+        return checks;
     }
 }

@@ -17,10 +17,10 @@ public abstract class GUI implements InventoryHolder {
         this.inventory.getViewers().forEach(HumanEntity::closeInventory);
     }
 
-    public GUI(String string, Integer n) {
-        this.inventory = Bukkit.createInventory(this, n, string);
-        this.header = string;
-        this.size = n;
+    public GUI(String title, Integer size) {
+        this.inventory = Bukkit.createInventory(this, size, title);
+        this.header = title;
+        this.size = size;
     }
 
     public Inventory getInventory() {
