@@ -51,3 +51,4 @@ Verus is a complete scam. There's absolutely no way to deny this. In this reposi
 - brownie (Cracking, Dumping, Deobfuscating, Fixing decompiled code)
 - FlyCode (Cleanup, Fixing decompiled code)
 - Newb (Fixing decompiled code)
+- Aidan (Cleanup)
