@@ -1,6 +1,7 @@
 package me.levansj01.verus.gui.impl;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import me.levansj01.verus.VerusPlugin;
@@ -15,7 +16,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class CheckGUI extends GUI {
-    private Map<Integer, CheckType> checksById = new ConcurrentHashMap<Integer, CheckType>();
+    private Map<Integer, CheckType> checksById = new ConcurrentHashMap<>();
 
     public void clear() {
         super.clear();
@@ -23,43 +24,40 @@ public class CheckGUI extends GUI {
     }
 
     public void onClick(InventoryClickEvent inventoryClickEvent) {
-        String string;
-        CheckType checkType;
-        int n = inventoryClickEvent.getSlot();
-        if (n >= 0 && n < 9) {
+        int slot = inventoryClickEvent.getSlot();
+        if (slot >= 0 && slot < 9) {
             GUIManager.getInstance().getMainGui().openGui((Player) inventoryClickEvent.getWhoClicked());
             return;
         }
+        CheckType checkType = this.checksById.get(slot);
         ItemStack itemStack = inventoryClickEvent.getCurrentItem();
         if (itemStack != null && itemStack.getItemMeta() != null
-                && (checkType = (CheckType) this.checksById.get((Object) n)) != null
-                && (string = ChatColor.stripColor((String) itemStack.getItemMeta().getDisplayName()
-                        .replace((CharSequence) " Checks", (CharSequence) ""))).equalsIgnoreCase(checkType.getName())) {
+                && checkType != null
+                && (ChatColor.stripColor(itemStack.getItemMeta().getDisplayName()
+                        .replace(" Checks", ""))).equalsIgnoreCase(checkType.getName())) {
             GUIManager.getInstance().getTypeGui(checkType).openGui((Player) inventoryClickEvent.getWhoClicked());
         }
     }
 
     public CheckGUI() {
-        super(VerusPlugin.COLOR + VerusPlugin.getNameFormatted() + " Checks", Integer.valueOf((int) 45));
-        int n = 0;
-        if (n < 9) {
-            this.inventory.setItem(n, new ItemBuilder().setType(MaterialList.STAINED_GLASS_PANE)
-                    .setName(ChatColor.RED + "Previous Page").setAmount(1)
-                    .setLore(Arrays.asList(new String[] { ChatColor.GRAY + "Click to go back a page" })).build());
-            ++n;
-        }
-        n = 9;
-        for (CheckType checkType : CheckType.values()) {
-            if (checkType == CheckType.MANUAL) {
+        super(VerusPlugin.COLOR + VerusPlugin.getNameFormatted() + " Checks", 45);
+        int slot = 0;
 
-            }
-            this.inventory.setItem(n, new ItemBuilder().setType(MaterialList.DIAMOND_SWORD)
+        while(slot < 9) {
+            this.inventory.setItem(0, new ItemBuilder().setType(MaterialList.STAINED_GLASS_PANE)
+                    .setName(ChatColor.RED + "Previous Page").setAmount(1)
+                    .setLore(Collections.singletonList(ChatColor.GRAY + "Click to go back a page")).build());
+            ++slot;
+        }
+
+        for (CheckType checkType : CheckType.values()) {
+            this.inventory.setItem(slot, new ItemBuilder().setType(MaterialList.DIAMOND_SWORD)
                     .setName(VerusPlugin.COLOR + checkType.getName() + " Checks")
-                    .setLore(Arrays.asList(
-                            new String[] { VerusPlugin.COLOR + "ID: " + ChatColor.WHITE + checkType.getSuffix() }))
+                    .setLore(Collections.singletonList(
+                            VerusPlugin.COLOR + "ID: " + ChatColor.WHITE + checkType.getSuffix()))
                     .setAmount(1).build());
-            this.checksById.put(n, checkType);
-            ++n;
+            this.checksById.put(slot, checkType);
+            ++slot;
         }
     }
 }

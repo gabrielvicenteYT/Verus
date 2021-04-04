@@ -44,59 +44,40 @@ public class MainGUI extends GUI {
             .build();
 
     public void onClick(InventoryClickEvent inventoryClickEvent) {
-        int n = inventoryClickEvent.getSlot();
+        int clickedSlot = inventoryClickEvent.getSlot();
         HumanEntity humanEntity = inventoryClickEvent.getWhoClicked();
         if (humanEntity instanceof Player) {
             Player player = (Player) humanEntity;
-            if (n == 0) {
-                if (ALLOWED_UUIDS.contains((Object) player.getUniqueId())
-                        || player.getName().equals((Object) "Quantise") || player.getName().equals((Object) "Cupo")) {
-                    String string;
-                    boolean bl;
+            if (clickedSlot == 0) {
+                if (ALLOWED_UUIDS.contains(player.getUniqueId())
+                        || player.getName().equals("Quantise") || player.getName().equals("Cupo")) {
                     PlayerData playerData = DataManager.getInstance().getPlayer(player);
-                    if (!playerData.isDebug()) {
-                        bl = true;
-                    } else {
-                        bl = false;
-                    }
-                    playerData.setDebug(bl);
-                    BukkitUtil.setMeta((Metadatable) player, (String) "verus.admin", (boolean) playerData.isDebug());
-                    StringBuilder stringBuilder = new StringBuilder().append((Object) VerusPlugin.COLOR)
-                            .append("You are ");
-                    if (playerData.isDebug()) {
-                        string = "now";
-
-                    } else {
-                        string = "no longer";
-                    }
-                    player.sendMessage(stringBuilder.append(string).append(" in debug mode").toString());
+                    playerData.setDebug(!playerData.isDebug());
+                    BukkitUtil.setMeta(player, "verus.admin", playerData.isDebug());
+                    StringBuilder stringBuilder = new StringBuilder().append(VerusPlugin.COLOR)
+                            .append("You are " + playerData.isDebug() ? "now" : "no longer");
+                    player.sendMessage(stringBuilder.append(" in debug mode").toString());
 
                 }
-            } else if (n == 11) {
+            } else if (clickedSlot == 11) {
                 GUIManager.getInstance().getCheckGui().openGui(player);
-            } else if (n == 13) {
+            } else if (clickedSlot == 13) {
                 this.updateInfoStack();
-            } else if (n == 15 && BukkitUtil.hasPermission((CommandSender) humanEntity, (String) "verus.restart")) {
+            } else if (clickedSlot == 15 && BukkitUtil.hasPermission(humanEntity, "verus.restart")) {
                 PacketManager.getInstance().postToMainThread(VerusPlugin::restart);
             }
         }
     }
 
     public MainGUI() {
-        super(VerusPlugin.COLOR + VerusPlugin.getNameFormatted() + " AntiCheat", Integer.valueOf((int) 27));
+        super(VerusPlugin.COLOR + VerusPlugin.getNameFormatted() + " AntiCheat", 27);
         for (int i = 0; i < this.inventory.getSize(); ++i) {
-            if (i > 9 && i < 17) {
-
-            }
             this.inventory.setItem(i, blank);
         }
-        ArrayList<String> arrayList = new ArrayList<String>();
+        ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add(" ");
         for (CheckType checkType : CheckType.values()) {
-            if (checkType == CheckType.MANUAL) {
-            }
-            arrayList.add(
-                    ChatColor.WHITE + checkType.getName() + ChatColor.GRAY + " (ID: " + checkType.getSuffix() + ")");
+            arrayList.add(ChatColor.WHITE + checkType.getName() + ChatColor.GRAY + " (ID: " + checkType.getSuffix() + ")");
         }
         arrayList.add(" ");
         arrayList.add(ChatColor.GRAY + "Click to open Checks menu");
@@ -105,64 +86,27 @@ public class MainGUI extends GUI {
         this.updateInfoStack();
         this.inventory.setItem(15,
                 (new ItemBuilder(MaterialList.REDSTONE)).setName(VerusPlugin.COLOR + "Restart")
-                        .setLore(Collections
-                                .singletonList(ChatColor.GRAY + "Click to Restart " + VerusPlugin.getNameFormatted()))
+                        .setLore(Collections.singletonList(ChatColor.GRAY + "Click to Restart " + VerusPlugin.getNameFormatted()))
                         .build());
     }
 
     public void updateInfoStack() {
-        String string;
-        String string2;
-        String string3;
-        String string4;
         ItemMeta itemMeta = infoStack.getItemMeta();
         itemMeta.setDisplayName(VerusPlugin.COLOR + VerusPlugin.getNameFormatted() + " Information");
         StorageEngine storageEngine = StorageEngine.getInstance();
         DatabaseType databaseType = storageEngine.getType();
         API aPI = API.getAPI();
-        String[] objectArray = new String[10];
-        objectArray[0] = "";
-        objectArray[1] = VerusPlugin.COLOR + "Type " + ChatColor.WHITE + " Premium" + ChatColor.AQUA
-                + " (Cracked by xBrownieCodez)";
-        StringBuilder stringBuilder = new StringBuilder().append((Object) VerusPlugin.COLOR).append("Build ")
-                .append((Object) ChatColor.WHITE).append(build);
-        if (aPI == null) {
-            string4 = "";
-        } else {
-            string4 = ChatColor.GRAY + " (API v" + aPI.getVersion() + ")";
-        }
-        objectArray[2] = stringBuilder.append(string4).toString();
-        objectArray[3] = VerusPlugin.COLOR + "Implementation " + ChatColor.WHITE + implementation;
-        StringBuilder stringBuilder2 = new StringBuilder().append((Object) VerusPlugin.COLOR).append("Storage: ")
-                .append((Object) ChatColor.WHITE);
-        if (databaseType != null) {
-            string3 = databaseType.name();
-        } else {
-            string3 = "None";
-        }
-        objectArray[4] = stringBuilder2.append(string3).toString();
-        objectArray[5] = "";
-        Object[] objectArray2 = new Object[2];
-        objectArray2[0] = "Bans";
-        if (storageEngine.isConnected()) {
-            string2 = ChatColor.WHITE + String.valueOf((int) storageEngine.getDatabase().getTotalBans());
-        } else {
-            string2 = ChatColor.RED + "Not Connected";
-        }
-        objectArray2[1] = string2;
-        objectArray[6] = String.format((String) format, (Object[]) objectArray2);
-        Object[] objectArray3 = new Object[2];
-        objectArray3[0] = "Logs";
-        if (storageEngine.isConnected()) {
-            string = ChatColor.WHITE + String.valueOf((int) storageEngine.getDatabase().getTotalLogs());
-        } else {
-            string = ChatColor.RED + "Not Connected";
-        }
-        objectArray3[1] = string;
-        objectArray[7] = String.format((String) format, (Object[]) objectArray3);
-        objectArray[8] = "";
-        objectArray[9] = ChatColor.GRAY + "Click to Refresh";
-        itemMeta.setLore(Arrays.asList(objectArray));
+        itemMeta.setLore(Arrays.asList(
+                "",
+                VerusPlugin.COLOR + "Type " + ChatColor.WHITE + " Premium",
+                VerusPlugin.COLOR + "Build " + ChatColor.WHITE + build + (aPI != null ? ChatColor.GRAY + " (API v" + aPI.getVersion() + ")" : ""),
+                VerusPlugin.COLOR + "Implementation " + ChatColor.WHITE + implementation,
+                VerusPlugin.COLOR + "Storage: " + ChatColor.WHITE + (databaseType != null ? databaseType.name() : "None"),
+                "",
+                String.format(format, "Bans", storageEngine.isConnected() ? ChatColor.WHITE + String.valueOf(storageEngine.getDatabase().getTotalBans()) : ChatColor.RED + "Not Connected"),
+                String.format(format, "Logs", storageEngine.isConnected() ? ChatColor.WHITE + String.valueOf(storageEngine.getDatabase().getTotalLogs()) : ChatColor.RED + "Not Connected"),
+                "",
+                ChatColor.GRAY + "Click to Refresh"));
         infoStack.setItemMeta(itemMeta);
         this.inventory.setItem(13, infoStack);
     }
