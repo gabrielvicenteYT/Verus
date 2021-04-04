@@ -4,6 +4,9 @@
 
 There is still shit to be done, but most stuff is there already.
 
+
+So please DON'T create issues about missing classes.
+
 # Why are you doing this?
 I'm doing this because i won't watch how they continue scamming their customer. So you have 3 options,
 - Shut Verus down
