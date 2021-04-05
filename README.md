@@ -13,6 +13,9 @@ I'm doing this because i won't watch how they continue scamming their customer. 
 - Pay me 350$ to stop this.
 
 
+
+# The truth about Verus
+
 Verus is a complete scam. There's absolutely no way to deny this. In this repository, you'll find some of the worst checks to ever be sold in a "premium" AntiCheat, though the verus developers don't see it that way. One of the Verus developers himself, Jacob, called Verus one of the best AntiCheats.
 
 # Why Verus is a scam
