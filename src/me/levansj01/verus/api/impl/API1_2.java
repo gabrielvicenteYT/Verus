@@ -26,18 +26,18 @@ public class API1_2 extends API {
 
     public void disable() {
         VerusAPI verusAPI = (VerusAPI) API1_2.fetchPlugin();
-        verusAPI.setVerusManager((VerusManager) new BlankManager());
+        verusAPI.setVerusManager(new BlankManager());
     }
 
     public boolean fireBanEvent(PlayerData playerData, Check check) {
         BanEvent banEvent = new BanEvent(playerData.getPlayer(), this.toAPI(check));
-        Bukkit.getPluginManager().callEvent((Event) banEvent);
+        Bukkit.getPluginManager().callEvent(banEvent);
         return banEvent.isCancelled();
     }
 
     public boolean fireViolationEvent(PlayerData playerData, Check check, int n) {
         ViolationEvent violationEvent = new ViolationEvent(playerData.getPlayer(), this.toAPI(check), n);
-        Bukkit.getPluginManager().callEvent((Event) violationEvent);
+        Bukkit.getPluginManager().callEvent(violationEvent);
         return violationEvent.isCancelled();
     }
 }

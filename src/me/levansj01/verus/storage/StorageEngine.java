@@ -1,10 +1,11 @@
 package me.levansj01.verus.storage;
 
-import java.util.logging.Logger;
 import me.levansj01.launcher.VerusLauncher;
 import me.levansj01.verus.storage.config.VerusConfiguration;
 import me.levansj01.verus.storage.database.Database;
 import me.levansj01.verus.storage.database.DatabaseType;
+
+import java.util.logging.Logger;
 
 public class StorageEngine {
     private static StorageEngine engine;
