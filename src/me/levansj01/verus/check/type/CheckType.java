@@ -55,7 +55,7 @@ public enum CheckType {
     }
 
     public static CheckType getByString(String string) {
-        return (CheckType) ((Object) nameMap.get((Object) string));
+        return (CheckType) (nameMap.get(string));
     }
 
     private CheckType(String var3, String var4) {

@@ -186,7 +186,7 @@ public class VerusPlugin implements VerusLaunch {
     }
 
     private static boolean lambda$registerCommands$1(Command command) {
-        return command.getName().equals((Object) Loader.getPingCommand());
+        return command.getName().equals(Loader.getPingCommand());
     }
 
     private void lambda$registerCommands$3(Map map, Command command) {

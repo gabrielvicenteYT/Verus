@@ -81,7 +81,7 @@ public class Intersection {
         }
         Direction direction = this.getDirection();
         Direction direction2 = intersection.getDirection();
-        if (direction == null ? direction2 != null : !direction.equals((Object) direction2)) {
+        if (direction == null ? direction2 != null : !direction.equals(direction2)) {
             return false;
         }
         return Double.compare(this.getDistance(), intersection.getDistance()) == 0;
