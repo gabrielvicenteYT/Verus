@@ -10,6 +10,8 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.material.MaterialData;
 
+import me.levansj01.verus.data.PlayerData;
+import me.levansj01.verus.data.version.ClientVersion;
 import me.levansj01.verus.util.MutableBlockLocation;
 
 public abstract class NMSManager
