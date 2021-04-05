@@ -9,17 +9,17 @@ import me.levansj01.verus.compat.VPacket;
 import me.levansj01.verus.compat.packets.VPacketPlayInCustomPayload;
 import me.levansj01.verus.compat.packets.VPacketPlayInFlying;
 
-@CheckInfo(type=CheckType.SERVER_CRASHER, subType="A", friendlyName="Server Crasher", version=CheckVersion.RELEASE, maxViolations=5, logData=true)
+@CheckInfo(type = CheckType.SERVER_CRASHER, subType = "A", friendlyName = "Server Crasher", version = CheckVersion.RELEASE, maxViolations = 5, logData = true)
 public class ServerCrasherA extends PacketCheck {
     private int threshold = 0;
 
     public void handle(VPacket vPacket, long l) {
         if (vPacket instanceof VPacketPlayInCustomPayload) {
-            VPacketPlayInCustomPayload vPacketPlayInCustomPayload = (VPacketPlayInCustomPayload)vPacket;
+            VPacketPlayInCustomPayload vPacketPlayInCustomPayload = (VPacketPlayInCustomPayload) vPacket;
             String string = vPacketPlayInCustomPayload.getChannel();
             if ((string.equals("MC|BOpen") || string.equals("MC|BEdit")) && (this.threshold += 2) > 4) {
                 this.handleViolation(String.format("C: %s", string), this.threshold / 4);
-                if (this.violations > (double)this.getMaxViolation()) {
+                if (this.violations > (double) this.getMaxViolation()) {
                     this.playerData.fuckOff();
                 }
             }

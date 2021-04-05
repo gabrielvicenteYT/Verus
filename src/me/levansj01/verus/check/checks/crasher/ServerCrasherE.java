@@ -8,7 +8,7 @@ import me.levansj01.verus.compat.VPacket;
 import me.levansj01.verus.compat.packets.VPacketPlayInFlying;
 import me.levansj01.verus.compat.packets.VPacketPlayInSetCreativeSlot;
 
-@CheckInfo(type=CheckType.SERVER_CRASHER, subType="E", friendlyName="Server Crasher", version=CheckVersion.DEVELOPMENT, maxViolations=1, minViolations=-2.0)
+@CheckInfo(type = CheckType.SERVER_CRASHER, subType = "E", friendlyName = "Server Crasher", version = CheckVersion.DEVELOPMENT, maxViolations = 1, minViolations = -2.0)
 public class ServerCrasherE extends PacketCheck {
     private int threshold = 0;
 
