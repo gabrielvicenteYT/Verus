@@ -9,7 +9,7 @@ import me.levansj01.verus.compat.packets.VPacketPlayInFlying;
 import me.levansj01.verus.compat.packets.VPacketPlayInUseEntity;
 import me.levansj01.verus.data.version.ClientVersion;
 
-@CheckInfo(type=CheckType.BAD_PACKETS, subType="P", friendlyName="KillAura", version=CheckVersion.RELEASE, unsupportedAtleast=ClientVersion.VERSION1_9)
+@CheckInfo(type = CheckType.BAD_PACKETS, subType = "P", friendlyName = "KillAura", version = CheckVersion.RELEASE, unsupportedAtleast = ClientVersion.VERSION1_9)
 public class BadPacketsP extends PacketCheck {
     private boolean interactAt;
     private boolean attack;
@@ -21,24 +21,10 @@ public class BadPacketsP extends PacketCheck {
             this.interactAt = false;
             this.attack = false;
         } else if (vPacket instanceof VPacketPlayInUseEntity) {
-            VPacketPlayInUseEntity vPacketPlayInUseEntity = (VPacketPlayInUseEntity)vPacket;
+            VPacketPlayInUseEntity vPacketPlayInUseEntity = (VPacketPlayInUseEntity) vPacket;
             if (vPacketPlayInUseEntity.getAction().isAttack()) {
                 if (!this.attack && (this.interact || this.interactAt)) {
-                    String string;
-                    String string2;
-                    StringBuilder stringBuilder = new StringBuilder().append("Attack [");
-                    if (this.interactAt) {
-                        string2 = "Interact At ";
-                    } else {
-                        string2 = "";
-                    }
-                    StringBuilder stringBuilder2 = stringBuilder.append(string2);
-                    if (this.interact) {
-                        string = "Interact";
-                    } else {
-                        string = "";
-                    }
-                    this.handleViolation(stringBuilder2.append(string).append("]").toString(), 1.0, true);
+                    this.handleViolation(String.format("Attack [%s]", interactAt ? "Interact At" : "Interact"), 1.0, true);
                     this.interactAt = false;
                     this.interact = false;
                 }

@@ -11,8 +11,9 @@ import me.levansj01.verus.compat.packets.VPacketPlayInFlying;
 import me.levansj01.verus.compat.packets.VPacketPlayInUseEntity;
 import me.levansj01.verus.data.version.ClientVersion;
 
-@CheckInfo(type=CheckType.BAD_PACKETS, subType="C", friendlyName="KillAura", version=CheckVersion.RELEASE, unsupportedAtleast=ClientVersion.VERSION1_9, unsupportedServers={ServerVersion.v1_11_R1, ServerVersion.v1_12_R1, ServerVersion.v1_14_R1, ServerVersion.v1_15_R1, ServerVersion.v1_16_R1, ServerVersion.v1_16_R2, ServerVersion.v1_16_R3})
+@CheckInfo(type = CheckType.BAD_PACKETS, subType = "C", friendlyName = "KillAura", version = CheckVersion.RELEASE, unsupportedAtleast = ClientVersion.VERSION1_9, unsupportedServers = {ServerVersion.v1_11_R1, ServerVersion.v1_12_R1, ServerVersion.v1_14_R1, ServerVersion.v1_15_R1, ServerVersion.v1_16_R1, ServerVersion.v1_16_R2, ServerVersion.v1_16_R3})
 public class BadPacketsC extends PacketCheck {
+
     private boolean received;
 
     public void handle(VPacket vPacket, long l) {
@@ -20,7 +21,7 @@ public class BadPacketsC extends PacketCheck {
             this.received = false;
         } else if (vPacket instanceof VPacketPlayInArmAnimation) {
             this.received = true;
-        } else if (vPacket instanceof VPacketPlayInUseEntity && ((VPacketPlayInUseEntity)vPacket).getAction() == VPacketPlayInUseEntity.EntityUseAction.ATTACK) {
+        } else if (vPacket instanceof VPacketPlayInUseEntity && ((VPacketPlayInUseEntity) vPacket).getAction() == VPacketPlayInUseEntity.EntityUseAction.ATTACK) {
             if (!this.received && this.playerData.isSurvival()) {
                 this.handleViolation();
             }

@@ -9,7 +9,7 @@ import me.levansj01.verus.compat.packets.VPacketPlayInBlockPlace;
 import me.levansj01.verus.compat.packets.VPacketPlayInFlying;
 import me.levansj01.verus.storage.StorageEngine;
 
-@CheckInfo(type=CheckType.BAD_PACKETS, subType="O", friendlyName="Invalid Interact", version=CheckVersion.RELEASE, minViolations=-1.5, maxViolations=5, schematica=true)
+@CheckInfo(type = CheckType.BAD_PACKETS, subType = "O", friendlyName = "Invalid Interact", version = CheckVersion.RELEASE, minViolations = -1.5, maxViolations = 5, schematica = true)
 public class BadPacketsO extends PacketCheck {
     private boolean placed;
 

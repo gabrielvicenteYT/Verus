@@ -8,15 +8,16 @@ import me.levansj01.verus.check.version.CheckVersion;
 import me.levansj01.verus.compat.VPacket;
 import me.levansj01.verus.compat.packets.VPacketPlayInUseEntity;
 
-@CheckInfo(type=CheckType.BAD_PACKETS, subType="K", friendlyName="Invalid Interact", version=CheckVersion.RELEASE, maxViolations=1, logData=true)
+@CheckInfo(type = CheckType.BAD_PACKETS, subType = "K", friendlyName = "Invalid Interact", version = CheckVersion.RELEASE, maxViolations = 1, logData = true)
 public class BadPacketsK extends PacketCheck {
+
     public void handle(VPacket vPacket, long l) {
-        if (vPacket instanceof VPacketPlayInUseEntity && ((VPacketPlayInUseEntity)vPacket).getId() == this.player.getEntityId() && this.playerData.isSurvival()) {
-            this.handleViolation(this::handle);
+        if (vPacket instanceof VPacketPlayInUseEntity && ((VPacketPlayInUseEntity) vPacket).getId() == this.player.getEntityId() && this.playerData.isSurvival()) {
+            this.handleViolation(this::formatDebug);
         }
     }
 
-    private String handle() {
+    private String formatDebug() {
         return String.format("E: %s", this.player.getEntityId());
     }
 }

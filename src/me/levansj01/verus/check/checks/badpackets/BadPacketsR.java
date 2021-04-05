@@ -10,7 +10,7 @@ import me.levansj01.verus.compat.packets.VPacketPlayInFlying;
 import me.levansj01.verus.compat.packets.VPacketPlayInUseEntity;
 import me.levansj01.verus.data.version.ClientVersion;
 
-@CheckInfo(type=CheckType.BAD_PACKETS, subType="R", friendlyName="KillAura", version=CheckVersion.RELEASE, unsupportedAtleast=ClientVersion.VERSION1_9)
+@CheckInfo(type = CheckType.BAD_PACKETS, subType = "R", friendlyName = "KillAura", version = CheckVersion.RELEASE, unsupportedAtleast = ClientVersion.VERSION1_9)
 public class BadPacketsR extends PacketCheck {
     private boolean sent;
     private boolean interact;
@@ -21,7 +21,7 @@ public class BadPacketsR extends PacketCheck {
             this.sent = false;
         } else if (vPacket instanceof VPacketPlayInBlockPlace) {
             this.sent = true;
-        } else if (vPacket instanceof VPacketPlayInUseEntity && ((VPacketPlayInUseEntity)vPacket).getAction().isInteract()) {
+        } else if (vPacket instanceof VPacketPlayInUseEntity && ((VPacketPlayInUseEntity) vPacket).getAction().isInteract()) {
             if (this.sent && !this.interact) {
                 this.handleViolation("", 1.0, true);
                 this.sent = false;

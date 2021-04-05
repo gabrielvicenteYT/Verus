@@ -10,7 +10,7 @@ import me.levansj01.verus.compat.packets.VPacketPlayInHeldItemSlot;
 import me.levansj01.verus.data.version.ClientVersion;
 import me.levansj01.verus.storage.StorageEngine;
 
-@CheckInfo(type=CheckType.BAD_PACKETS, subType="U", friendlyName="Invalid Inventory", version=CheckVersion.RELEASE, minViolations=-1.5, maxViolations=5, logData=true, schematica=true)
+@CheckInfo(type = CheckType.BAD_PACKETS, subType = "U", friendlyName = "Invalid Inventory", version = CheckVersion.RELEASE, minViolations = -1.5, maxViolations = 5, logData = true, schematica = true)
 public class BadPacketsU extends PacketCheck {
     private Long lastFlying;
     private Long swapped;

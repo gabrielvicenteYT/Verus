@@ -10,7 +10,7 @@ import me.levansj01.verus.compat.packets.VPacketPlayInBlockDig;
 import me.levansj01.verus.compat.packets.VPacketPlayInFlying;
 import me.levansj01.verus.data.version.ClientVersion;
 
-@CheckInfo(type=CheckType.BAD_PACKETS, subType="X", friendlyName="FastBreak", version=CheckVersion.RELEASE, minViolations=-1.0, maxViolations=10)
+@CheckInfo(type = CheckType.BAD_PACKETS, subType = "X", friendlyName = "FastBreak", version = CheckVersion.RELEASE, minViolations = -1.0, maxViolations = 10)
 public class BadPacketsX extends PacketCheck {
     private int ticks = 0;
     private int stage = 0;
@@ -27,7 +27,7 @@ public class BadPacketsX extends PacketCheck {
                 this.stage = 0;
             }
         } else if (vPacket instanceof VPacketPlayInBlockDig) {
-            VPacketPlayInBlockDig vPacketPlayInBlockDig = (VPacketPlayInBlockDig)vPacket;
+            VPacketPlayInBlockDig vPacketPlayInBlockDig = (VPacketPlayInBlockDig) vPacket;
             if (vPacketPlayInBlockDig.getType() == VPacketPlayInBlockDig.PlayerDigType.STOP_DESTROY_BLOCK) {
                 this.stage = 1;
                 this.decreaseVL(1.0E-4);

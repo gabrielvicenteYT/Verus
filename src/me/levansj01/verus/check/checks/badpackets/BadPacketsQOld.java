@@ -15,7 +15,7 @@ public class BadPacketsQOld extends PacketCheck {
         if (vPacket instanceof VPacketPlayInFlying) {
             this.sent = false;
         } else if (vPacket instanceof VPacketPlayInUseEntity) {
-            VPacketPlayInUseEntity vPacketPlayInUseEntity = (VPacketPlayInUseEntity)vPacket;
+            VPacketPlayInUseEntity vPacketPlayInUseEntity = (VPacketPlayInUseEntity) vPacket;
             if (vPacketPlayInUseEntity.getAction().isInteract()) {
                 if (this.playerData.getVersion() == ClientVersion.VERSION1_8 && !this.sent) {
                     this.handleViolation("", 1.0, true);

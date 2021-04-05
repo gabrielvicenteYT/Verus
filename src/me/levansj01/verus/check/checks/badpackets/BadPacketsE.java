@@ -10,7 +10,7 @@ import me.levansj01.verus.compat.packets.VPacketPlayInFlying;
 import me.levansj01.verus.data.version.ClientVersion;
 import me.levansj01.verus.storage.StorageEngine;
 
-@CheckInfo(type=CheckType.BAD_PACKETS, subType="E", friendlyName="Invalid Move", version=CheckVersion.RELEASE, unsupportedAtleast=ClientVersion.VERSION1_9)
+@CheckInfo(type = CheckType.BAD_PACKETS, subType = "E", friendlyName = "Invalid Move", version = CheckVersion.RELEASE, unsupportedAtleast = ClientVersion.VERSION1_9)
 public class BadPacketsE extends PacketCheck {
     private int threshold = 0;
     private boolean sentSprint;
@@ -23,7 +23,7 @@ public class BadPacketsE extends PacketCheck {
                 this.sentSneak = false;
                 this.threshold = 0;
             } else if (vPacket instanceof VPacketPlayInEntityAction && !this.playerData.isVehicle() && this.playerData.isSurvival() && !this.playerData.isTeleportingV2() && !this.playerData.hasLag()) {
-                VPacketPlayInEntityAction vPacketPlayInEntityAction = (VPacketPlayInEntityAction)vPacket;
+                VPacketPlayInEntityAction vPacketPlayInEntityAction = (VPacketPlayInEntityAction) vPacket;
                 VPacketPlayInEntityAction.PlayerAction playerAction = vPacketPlayInEntityAction.getAction();
                 if (playerAction.isSprint()) {
                     if (this.sentSprint) {
