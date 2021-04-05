@@ -101,7 +101,7 @@ public class MathUtil {
     }
 
     public static DecimalFormat getFormat(int n2) {
-        return formatMap.computeIfAbsent(Thread.currentThread(), thread -> new HashMap()).computeIfAbsent(n2, n -> new DecimalFormat("0." + MathUtil.multiply("0", n)));
+        return formatMap.computeIfAbsent(Thread.currentThread(), thread -> new HashMap<Integer, DecimalFormat>()).computeIfAbsent(n2, n -> new DecimalFormat("0." + MathUtil.multiply("0", n)));
     }
 
     public static String format(double d, int n) {
