@@ -30,7 +30,7 @@ public class FlyA extends PacketCheck {
 
     public void handle(VPacket var1, long var2) {
         if (var1 instanceof VPacketPlayInFlying) {
-            VPacketPlayInFlying var4 = (VPacketPlayInFlying)var1;
+            VPacketPlayInFlying var4 = (VPacketPlayInFlying) var1;
             PacketLocation var5 = this.playerData.getCurrentLocation2();
             if (this.ground && var5.isGround() && this.playerData.isSurvival()) {
                 World var6 = this.player.getWorld();

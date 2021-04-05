@@ -10,7 +10,7 @@ import me.levansj01.verus.compat.packets.VPacketPlayInFlying;
 import me.levansj01.verus.compat.packets.VPacketPlayInWindowClick;
 import me.levansj01.verus.data.version.ClientVersion;
 
-@CheckInfo(type=CheckType.INVENTORY, subType="J", friendlyName="KillAura", version=CheckVersion.RELEASE, unsupportedAtleast=ClientVersion.VERSION1_9)
+@CheckInfo(type = CheckType.INVENTORY, subType = "J", friendlyName = "KillAura", version = CheckVersion.RELEASE, unsupportedAtleast = ClientVersion.VERSION1_9)
 public class InventoryJ extends PacketCheck {
     private boolean swing = false;
     private boolean click = false;
