@@ -50,7 +50,7 @@ public class Intersection {
         n2 = n2 * 59 + (direction == null ? 43 : direction.hashCode());
         long l = Double.doubleToLongBits(this.getDistance());
         n2 = n2 * 59 + (int) (l >>> 32 ^ l);
-        n2 = n2 * 59 + (direction == null ? 43 : ((Object)((Object)direction)).hashCode());
+        n2 = n2 * 59 + (direction == null ? 43 : ((direction)).hashCode());
         return n2;
     }
 

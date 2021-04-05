@@ -18,7 +18,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 public abstract class Database {
-    protected final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor((ThreadFactory)new ThreadFactoryBuilder().setPriority(3).setNameFormat(String.valueOf((Object)new StringBuilder().append(this.getClass().getSimpleName()).append(" Executor Thread"))).build());
+    protected final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor((ThreadFactory)new ThreadFactoryBuilder().setPriority(3).setNameFormat(String.valueOf(new StringBuilder().append(this.getClass().getSimpleName()).append(" Executor Thread"))).build());
 
     public void getLogs(UUID uUID, Consumer consumer) {
         this.getLogs(uUID, 3000, consumer);
@@ -29,21 +29,21 @@ public abstract class Database {
     private void getUUID2(String string, Consumer consumer) {
         Player player = Bukkit.getPlayerExact((String)string);
         if (player != null) {
-            consumer.accept((Object)player.getUniqueId());
+            consumer.accept(player.getUniqueId());
             return;
         }
         UUID uUID = this.fetchUUID(string);
         if (uUID == null) {
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer((String)string);
             if (offlinePlayer != null && offlinePlayer.hasPlayedBefore()) {
-                consumer.accept((Object)offlinePlayer.getUniqueId());
+                consumer.accept(offlinePlayer.getUniqueId());
 
             } else {
                 consumer.accept(null);
             }
 
         } else {
-            consumer.accept((Object)uUID);
+            consumer.accept(uUID);
         }
     }
 

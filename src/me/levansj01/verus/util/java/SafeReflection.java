@@ -41,7 +41,7 @@ public class SafeReflection {
     }
 
     public static Map<String, Command> getKnownCommands(SimpleCommandMap simpleCommandMap) {
-        return (Map)SafeReflection.getLocalField(SimpleCommandMap.class, (Object)simpleCommandMap, "knownCommands");
+        return (Map)SafeReflection.getLocalField(SimpleCommandMap.class, simpleCommandMap, "knownCommands");
     }
 
     public static <T> Constructor<T> constructor(Class<T> class_, Class<?> ... arrclass) {
@@ -110,7 +110,7 @@ public class SafeReflection {
     }
 
     public static SimpleCommandMap getCommandMap() {
-        return (SimpleCommandMap)SafeReflection.getLocalField(Bukkit.getServer().getClass(), (Object)Bukkit.getServer(), "commandMap");
+        return (SimpleCommandMap)SafeReflection.getLocalField(Bukkit.getServer().getClass(), Bukkit.getServer(), "commandMap");
     }
 
     public static <T> T execute(Method method, Object object, Object ... arrobject) {

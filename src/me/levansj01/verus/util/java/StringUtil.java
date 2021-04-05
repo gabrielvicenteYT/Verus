@@ -9,11 +9,11 @@ public class StringUtil {
     public static String differenceAsTime(long l) {
         long l2 = TimeUnit.MILLISECONDS.toDays(l);
         long l3 = TimeUnit.HOURS.convert(l, TimeUnit.MILLISECONDS);
-        return l2 == 0L ? (l3 == 0L ? String.valueOf(new StringBuilder().append((Object)ChatColor.WHITE).append(String.valueOf(TimeUnit.MINUTES.convert(l, TimeUnit.MILLISECONDS)).concat(String.valueOf(new StringBuilder().append((Object)ChatColor.GRAY).append(" minutes ago"))))) : String.valueOf(new StringBuilder().append((Object)ChatColor.WHITE).append(String.valueOf(l3).concat(String.valueOf(new StringBuilder().append((Object)ChatColor.GRAY).append(" hours ago")))))) : String.valueOf(new StringBuilder().append((Object)ChatColor.WHITE).append(String.valueOf(l2).concat(String.valueOf(new StringBuilder().append((Object)ChatColor.GRAY).append(" days ago")))));
+        return l2 == 0L ? (l3 == 0L ? String.valueOf(new StringBuilder().append(ChatColor.WHITE).append(String.valueOf(TimeUnit.MINUTES.convert(l, TimeUnit.MILLISECONDS)).concat(String.valueOf(new StringBuilder().append(ChatColor.GRAY).append(" minutes ago"))))) : String.valueOf(new StringBuilder().append(ChatColor.WHITE).append(String.valueOf(l3).concat(String.valueOf(new StringBuilder().append(ChatColor.GRAY).append(" hours ago")))))) : String.valueOf(new StringBuilder().append(ChatColor.WHITE).append(String.valueOf(l2).concat(String.valueOf(new StringBuilder().append(ChatColor.GRAY).append(" days ago")))));
     }
 
     static {
-        LINE = String.valueOf(new StringBuilder().append((Object)ChatColor.GRAY).append(ChatColor.STRIKETHROUGH.toString()).append("-----------------------------------------"));
+        LINE = String.valueOf(new StringBuilder().append(ChatColor.GRAY).append(ChatColor.STRIKETHROUGH.toString()).append("-----------------------------------------"));
     }
 
     public static String plainDifferenceAsTime(long l) {

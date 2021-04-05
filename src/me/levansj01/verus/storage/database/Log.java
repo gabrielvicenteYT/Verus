@@ -31,16 +31,16 @@ public class Log {
 
     public Document toBson() {
         Document document = new Document();
-        document.put("uuid", (Object)this.uuid);
-        document.put("name", (Object)this.name);
-        document.put("timestamp", (Object)this.timestamp);
-        document.put("type", (Object)this.type);
-        document.put("subType", (Object)this.subType);
-        document.put("violations", (Object)this.violations);
-        document.put("ping", (Object)this.ping);
-        document.put("lag", (Object)this.lag);
+        document.put("uuid", this.uuid);
+        document.put("name", this.name);
+        document.put("timestamp", this.timestamp);
+        document.put("type", this.type);
+        document.put("subType", this.subType);
+        document.put("violations", this.violations);
+        document.put("ping", this.ping);
+        document.put("lag", this.lag);
         if (this.data != null) {
-            document.put("data", (Object)this.data);
+            document.put("data", this.data);
         }
         return document;
     }
@@ -78,7 +78,7 @@ public class Log {
     }
 
     public static Log fromBson(Document document) {
-        return new Log((UUID)document.get((Object)"uuid", UUID.class), document.getString((Object)"name"), document.getLong((Object)"timestamp"), document.getString((Object)"type"), document.getString((Object)"subType"), document.getInteger((Object)"violations"), document.getInteger((Object)"ping"), document.getInteger((Object)"lag"), document.getString((Object)"data"));
+        return new Log((UUID)document.get("uuid", UUID.class), document.getString("name"), document.getLong("timestamp"), document.getString("type"), document.getString("subType"), document.getInteger("violations"), document.getInteger("ping"), document.getInteger("lag"), document.getString("data"));
     }
 
     public UUID getUuid() {
