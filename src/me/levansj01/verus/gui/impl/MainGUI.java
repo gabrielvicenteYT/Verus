@@ -15,6 +15,7 @@ import me.levansj01.verus.data.PlayerData;
 import me.levansj01.verus.data.manager.DataManager;
 import me.levansj01.verus.gui.GUI;
 import me.levansj01.verus.gui.manager.GUIManager;
+import me.levansj01.verus.gui.utils.Format;
 import me.levansj01.verus.storage.StorageEngine;
 import me.levansj01.verus.storage.database.DatabaseType;
 import me.levansj01.verus.type.VerusTypeLoader;
@@ -34,8 +35,7 @@ import org.bukkit.metadata.Metadatable;
 
 public class MainGUI extends GUI {
     private static final String format = VerusPlugin.COLOR + "Total %s %s";
-    private static final String verusType = WordUtils
-            .capitalize((String) VerusTypeLoader.getVerusType().name().toLowerCase());
+    private static final String verusType = WordUtils.capitalize((String) VerusTypeLoader.getVerusType().name().toLowerCase());
     private static final String build = String.valueOf(VerusPlugin.getBuild());
     public static final Set<UUID> ALLOWED_UUIDS = ImmutableSet.of(UUID.fromString(""));
     private static final ItemStack infoStack = new ItemStack(MaterialList.PAPER);
@@ -94,10 +94,10 @@ public class MainGUI extends GUI {
         API aPI = API.getAPI();
         itemMeta.setLore(Arrays.asList(
                 "",
-                VerusPlugin.COLOR + "Type " + ChatColor.WHITE + " Premium",
-                VerusPlugin.COLOR + "Build " + ChatColor.WHITE + build + (aPI != null ? ChatColor.GRAY + " (API v" + aPI.getVersion() + ")" : ""),
-                VerusPlugin.COLOR + "Implementation " + ChatColor.WHITE + implementation,
-                VerusPlugin.COLOR + "Storage: " + ChatColor.WHITE + (databaseType != null ? databaseType.name() : "None"),
+                Format.info("Type", "Premium"),
+                Format.info("Build",  build + (aPI != null ? ChatColor.GRAY + " (API v" + aPI.getVersion() + ")" : "")),
+                Format.info("Implementation", implementation),
+                Format.info("Storage", (databaseType != null ? databaseType.name() : "None")),
                 "",
                 String.format(format, "Bans", storageEngine.isConnected() ? ChatColor.WHITE + String.valueOf(storageEngine.getDatabase().getTotalBans()) : ChatColor.RED + "Not Connected"),
                 String.format(format, "Logs", storageEngine.isConnected() ? ChatColor.WHITE + String.valueOf(storageEngine.getDatabase().getTotalLogs()) : ChatColor.RED + "Not Connected"),
