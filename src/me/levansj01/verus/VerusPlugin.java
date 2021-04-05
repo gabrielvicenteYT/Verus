@@ -221,8 +221,8 @@ public class VerusPlugin implements VerusLaunch {
 
     public static void restart() {
         VerusLauncher verusLauncher = VerusLauncher.getPlugin();
-        Bukkit.getPluginManager().disablePlugin((Plugin) verusLauncher);
-        Bukkit.getPluginManager().enablePlugin((Plugin) verusLauncher);
+        Bukkit.getPluginManager().disablePlugin(verusLauncher);
+        Bukkit.getPluginManager().enablePlugin(verusLauncher);
     }
 
     public Server getServer() {
@@ -230,6 +230,6 @@ public class VerusPlugin implements VerusLaunch {
     }
 
     public static String getNameFormatted() {
-        return WordUtils.capitalize((String) name);
+        return WordUtils.capitalize(name);
     }
 }
