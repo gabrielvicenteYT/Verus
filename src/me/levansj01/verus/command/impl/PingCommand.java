@@ -67,7 +67,7 @@ extends BaseCommand {
             String string3 = player3.getName();
             if (player2 != null && !player2.canSee(player3)) continue;
             if (stringArray.length == 1 && StringUtil.startsWithIgnoreCase((String)string3, (String)(string2 = stringArray[stringArray.length - 1]))) {
-                arrayList.add((Object)string3);
+                arrayList.add(string3);
             }
             
         }

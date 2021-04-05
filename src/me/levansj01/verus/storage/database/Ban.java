@@ -23,11 +23,11 @@ public class Ban {
 
     public Document toBson() {
         Document document = new Document();
-        document.put("uuid", (Object) this.uuid);
-        document.put("name", (Object) this.name);
-        document.put("timestamp", (Object) this.timestamp);
-        document.put("type", (Object) this.type);
-        document.put("subType", (Object) this.subType);
+        document.put("uuid",  this.uuid);
+        document.put("name",  this.name);
+        document.put("timestamp",  this.timestamp);
+        document.put("type",  this.type);
+        document.put("subType",  this.subType);
         return document;
     }
 

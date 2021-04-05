@@ -41,7 +41,7 @@ public class SafeReflection {
     }
 
     public static Map<String, Command> getKnownCommands(SimpleCommandMap simpleCommandMap) {
-        return (Map)SafeReflection.getLocalField(SimpleCommandMap.class, (Object)simpleCommandMap, "knownCommands");
+        return (Map)SafeReflection.getLocalField(SimpleCommandMap.class, simpleCommandMap, "knownCommands");
     }
 
     public static <T> Constructor<T> constructor(Class<T> class_, Class<?> ... arrclass) {
@@ -61,7 +61,7 @@ public class SafeReflection {
 
     public static <T> T fetch(Field field, Object object) {
         try {
-            return (T)field.get(object);
+            return (T)field.get;
         }
         catch (IllegalAccessException illegalAccessException) {
             throw new IllegalArgumentException(illegalAccessException);
@@ -110,7 +110,7 @@ public class SafeReflection {
     }
 
     public static SimpleCommandMap getCommandMap() {
-        return (SimpleCommandMap)SafeReflection.getLocalField(Bukkit.getServer().getClass(), (Object)Bukkit.getServer(), "commandMap");
+        return (SimpleCommandMap)SafeReflection.getLocalField(Bukkit.getServer().getClass(), Bukkit.getServer(), "commandMap");
     }
 
     public static <T> T execute(Method method, Object object, Object ... arrobject) {
@@ -146,7 +146,7 @@ public class SafeReflection {
 
     public static <T> T fetch(Field field, Object object, Class<T> class_) {
         try {
-            return (T)field.get(object);
+            return (T)field.get;
         }
         catch (IllegalAccessException illegalAccessException) {
             throw new IllegalArgumentException(illegalAccessException);
@@ -160,7 +160,7 @@ public class SafeReflection {
                 Class<?> class_ = Class.forName(string2);
                 Field field = class_.getDeclaredField(string);
                 field.setAccessible(true);
-                return (T)field.get(object);
+                return (T)field.get;
             }
             catch (ClassNotFoundException | IllegalAccessException | NoSuchFieldException reflectiveOperationException2) {
                 reflectiveOperationException = reflectiveOperationException2;

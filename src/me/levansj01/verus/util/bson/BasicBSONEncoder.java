@@ -438,7 +438,7 @@ public class BasicBSONEncoder implements BSONEncoder {
                 bsonWriter.writeString(i);
             }
         } else {
-            int length = Array.getLength(object);
+            int length = Array.getLength;
             for (int i = 0; i < length; i++) {
                 _putObjectField(String.valueOf(i), Array.get(object, i));
             }
