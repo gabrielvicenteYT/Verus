@@ -1,17 +1,11 @@
-# Verus AntiCheat SourceCode
-### (VOSP) Verus-Open-Source-Project
+# Verus Anti-Cheat
+### (VOSP) Verus Open Source Project
+
 !!WORK IN PROGRESS!!
 
 There is still shit to be done, but most stuff is there already.
 
 So please DON'T create issues about missing classes.
-
-# Why are you doing this?
-I'm doing this because i won't watch how they continue scamming their customer. So you have 3 options,
-- Shut Verus down
-- Ignore this (and I won't stop)
-- Pay me 350$ to stop this.
-
 
 
 # The truth about Verus
@@ -54,6 +48,6 @@ Verus is a complete scam. There's absolutely no way to deny this. In this reposi
 
 ## Credits
 - brownie (Cracking, Dumping, Deobfuscating, Fixing decompiled code)
-- FlyCode (Cleanup, Fixing decompiled code)
+- Aidan (Fixed Decompiled Code, Cleanup, mapping)
 - Newb (Fixing decompiled code)
-- Aidan (Cleanup)
+- FlyCode (Cleanup, Fixing decompiled code)
