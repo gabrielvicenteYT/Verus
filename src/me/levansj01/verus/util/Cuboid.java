@@ -43,8 +43,7 @@ public class Cuboid {
         return this.z2;
     }
 
-    @Deprecated
-    public boolean _checkBlocks(Player player, World world, Predicate<Material> predicate) {
+    public boolean checkBlocks(Player player, World world, Predicate<Material> predicate) {
         return Cuboid.checkBlocks(player, world, this.getBlocks(), predicate);
     }
 
@@ -497,7 +496,6 @@ public class Cuboid {
         return this.setValues(d, d, d2, d2, d3, d3);
     }
 
-    @Deprecated
     public static boolean checkBlocks(Player player, World world, Iterable<MutableBlockLocation> iterable,
             Predicate<Material> predicate) {
         for (MutableBlockLocation mutableBlockLocation : iterable) {
