@@ -65,6 +65,10 @@ public class Cuboid
     public Cuboid(final PlayerLocation playerLocation, final PlayerLocation playerLocation2) {
         this(Math.min(playerLocation.getX(), playerLocation2.getX()), Math.max(playerLocation.getX(), playerLocation2.getX()), Math.min(playerLocation.getY(), playerLocation2.getY()), Math.max(playerLocation.getY(), playerLocation2.getY()), Math.min(playerLocation.getZ(), playerLocation2.getZ()), Math.max(playerLocation.getZ(), playerLocation2.getZ()));
     }
+
+    public static Cuboid withLimit(PacketLocation packetLocation, PacketLocation packetLocation2, int range) {
+        return packetLocation.distanceSquared(packetLocation2) < (double)n ? new me.levansj01.verus.util.Cuboid(packetLocation, packetLocation2) : new me.levansj01.verus.util.Cuboid(packetLocation2);
+    }
     
     @Deprecated
     public static boolean checkBlocks(final Player player, final World world, final Iterable<MutableBlockLocation> iterable, final Predicate<Material> predicate) {
