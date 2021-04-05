@@ -50,7 +50,7 @@ public class Intersection {
         n2 = n2 * 59 + (direction == null ? 43 : direction.hashCode());
         long l = Double.doubleToLongBits(this.getDistance());
         n2 = n2 * 59 + (int) (l >>> 32 ^ l);
-        n2 = n2 * 59 + (direction == null ? 43 : ((direction)).hashCode());
+        n2 = n2 * 59 + (direction == null ? 43 : ((Object)((Object)direction)).hashCode());
         return n2;
     }
 
@@ -81,7 +81,7 @@ public class Intersection {
         }
         Direction direction = this.getDirection();
         Direction direction2 = intersection.getDirection();
-        if (direction == null ? direction2 != null : !direction.equals( direction2)) {
+        if (direction == null ? direction2 != null : !direction.equals((Object) direction2)) {
             return false;
         }
         return Double.compare(this.getDistance(), intersection.getDistance()) == 0;

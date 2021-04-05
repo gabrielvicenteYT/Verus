@@ -58,7 +58,7 @@ public class BukkitUtil {
 
     public static void setMeta(Metadatable metadatable, String string, boolean bl) {
         if (bl) {
-            metadatable.setMetadata(string, (MetadataValue)new FixedMetadataValue((Plugin)VerusLauncher.getPlugin(), true));
+            metadatable.setMetadata(string, (MetadataValue)new FixedMetadataValue((Plugin)VerusLauncher.getPlugin(), (Object)true));
         } else {
             metadatable.removeMetadata(string, (Plugin)VerusLauncher.getPlugin());
         }

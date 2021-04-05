@@ -112,7 +112,7 @@ public class MaterialList {
             }
             return !potion.isSplash();
         }
-        return PLACEABLE.contains(material);
+        return PLACEABLE.contains((Object)material);
     }
 
     private static Material fromName(String string) {

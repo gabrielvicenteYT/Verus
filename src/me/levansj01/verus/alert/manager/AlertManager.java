@@ -78,14 +78,14 @@ public class AlertManager {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            StringBuilder stringBuilder = new StringBuilder().append( VerusPlugin.COLOR);
+            StringBuilder stringBuilder = new StringBuilder().append((Object) VerusPlugin.COLOR);
             if (bl) {
                 string3 = "Admin ";
             } else {
                 string3 = "";
             }
             commandSender.sendMessage(stringBuilder.append(string3).append("Logs URL: ")
-                    .append( ChatColor.WHITE).append(string5).toString());
+                    .append((Object) ChatColor.WHITE).append(string5).toString());
             return;
         }
         commandSender.sendMessage(ChatColor.GRAY + "(Uploads failed, uploading to pastebin...)");
@@ -93,14 +93,14 @@ public class AlertManager {
                 new AccountCredentials("5cf15f66d42e7b9613def0588fd47c39", "levansj04", "/hFpFC9Ef3b&G3-"))
                         .createPaste(new Paste("Logs: " + uUID, string, PasteHighLight.TEXT, PasteExpiration.ONE_WEEK,
                                 PasteVisibility.UNLISTED));
-        StringBuilder stringBuilder = new StringBuilder().append( VerusPlugin.COLOR);
+        StringBuilder stringBuilder = new StringBuilder().append((Object) VerusPlugin.COLOR);
         if (bl) {
             string2 = "Admin ";
 
         } else {
             string2 = "";
         }
-        commandSender.sendMessage(stringBuilder.append(string2).append("Logs URL ").append( ChatColor.WHITE)
+        commandSender.sendMessage(stringBuilder.append(string2).append("Logs URL ").append((Object) ChatColor.WHITE)
                 .append(pastebin).toString());
 
     }
@@ -265,7 +265,7 @@ public class AlertManager {
         } else {
             string = "";
         }
-        String string2 = stringBuilder.append(string).append("Logs of (").append( uUID).append("):\n")
+        String string2 = stringBuilder.append(string).append("Logs of (").append((Object) uUID).append("):\n")
                 .toString();
         for (Log log : iterable) {
             string2 = string2 + this.toString(log, bl);

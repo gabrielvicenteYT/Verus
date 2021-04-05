@@ -52,8 +52,8 @@ public class CheckManager {
     }
 
     private void saveChecks(YamlConfiguration yamlConfiguration, Check check) {
-        yamlConfiguration.set(check.getType().getName() + "." + check.getSubType() + ".enabled", this.isEnabled(check));
-        yamlConfiguration.set(check.getType().getName() + "." + check.getSubType() + ".autoban", this.isAutoban(check));
+        yamlConfiguration.set(check.getType().getName() + "." + check.getSubType() + ".enabled", (Object)this.isEnabled(check));
+        yamlConfiguration.set(check.getType().getName() + "." + check.getSubType() + ".autoban", (Object)this.isAutoban(check));
     }
 
     public static CheckManager getInstance() {

@@ -49,7 +49,7 @@ import java.util.Map;
  *
  * <p><strong>Please note</strong> that the thread-safety guarantees are limited to the thread-safety of the non-mutative (non-destructive)
  * operations of the underlying map implementation. For instance some implementations such as {@link java.util.WeakHashMap} and {@link
- * java.util.LinkedHashMap} with access ordering are actually structurally modified by the {@link #get} method and are therefore not
+ * java.util.LinkedHashMap} with access ordering are actually structurally modified by the {@link #get(Object)} method and are therefore not
  * suitable candidates as delegates for this class.
  *
  * @param <K> the key type

@@ -38,7 +38,7 @@ public class AlertsCommand extends BaseCommand {
                         this.update(playerData);
                         BukkitUtil.setMeta((Metadatable) player, (String) "verus.admin",
                                 (boolean) playerData.isDebug());
-                        StringBuilder stringBuilder = new StringBuilder().append( VerusPlugin.COLOR)
+                        StringBuilder stringBuilder = new StringBuilder().append((Object) VerusPlugin.COLOR)
                                 .append("You are ");
                         if (playerData.isDebug()) {
                             string = "now";

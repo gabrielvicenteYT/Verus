@@ -14,10 +14,10 @@ public class CheckValues {
     }
 
     public Document toBson() {
-        Document document = new Document("_id", this.checkId);
-        document.put("punish", this.punish);
-        document.put("alert", this.alert);
-        document.put("maxViolations", this.maxViolations);
+        Document document = new Document("_id", (Object)this.checkId);
+        document.put("punish", (Object)this.punish);
+        document.put("alert", (Object)this.alert);
+        document.put("maxViolations", (Object)this.maxViolations);
         return document;
     }
 
