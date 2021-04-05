@@ -54,8 +54,7 @@ public class MainGUI extends GUI {
                         PlayerData playerData = DataManager.getInstance().getPlayer(player);
                         playerData.setDebug(!playerData.isDebug());
                         BukkitUtil.setMeta(player, "verus.admin", playerData.isDebug());
-                        StringBuilder stringBuilder = new StringBuilder().append(VerusPlugin.COLOR).append("You are " + playerData.isDebug() ? "now" : "no longer");
-                        player.sendMessage(stringBuilder.append(" in debug mode").toString());
+                        player.sendMessage(String.format(VerusPlugin.COLOR + "You are %s debug mode", playerData.isDebug() ? "now" : "no longer"));
                     }
                     break;
                 case 11:
