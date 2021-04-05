@@ -11,13 +11,9 @@ import me.levansj01.verus.compat.packets.VPacketPlayInFlying;
 @CheckInfo(type=CheckType.BAD_PACKETS, subType="B", friendlyName="Invalid Direction", version=CheckVersion.RELEASE, maxViolations=1)
 public class BadPacketsB extends PacketCheck {
     public void handle(VPacket vPacket, long l) {
-        float f;
-        if (vPacket instanceof VPacketPlayInFlying && !this.playerData.isTeleportingV2() && !this.playerData.isTeleporting() && Math.abs(f = ((VPacketPlayInFlying)vPacket).getPitch()) > 90.0f) {
-            this.handleViolation(() -> BadPacketsB.lambda$handle$0(f));
+        float pitch;
+        if (vPacket instanceof VPacketPlayInFlying && !this.playerData.isTeleportingV2() && !this.playerData.isTeleporting() && Math.abs(pitch = ((VPacketPlayInFlying)vPacket).getPitch()) > 90.0f) {
+            this.handleViolation(() -> String.format("P: %.2f", pitch));
         }
-    }
-
-    private static String lambda$handle$0(float f) {
-        return String.format("P: %.2f", f);
     }
 }
