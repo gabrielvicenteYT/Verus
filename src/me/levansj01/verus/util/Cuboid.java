@@ -67,7 +67,7 @@ public class Cuboid
     }
 
     public static Cuboid withLimit(PacketLocation packetLocation, PacketLocation packetLocation2, int range) {
-        return packetLocation.distanceSquared(packetLocation2) < (double)range ? new me.levansj01.verus.util.Cuboid(packetLocation, packetLocation2) : new me.levansj01.verus.util.Cuboid(packetLocation2);
+        return packetLocation.distanceSquared(packetLocation2) < (double)range ? new Cuboid(packetLocation, packetLocation2) : new Cuboid(packetLocation2);
     }
     
     @Deprecated
