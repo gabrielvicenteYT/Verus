@@ -37,8 +37,7 @@ public class GUIManager {
         this.typeGuis = new ConcurrentHashMap<>();
         List<Check> list = verusPlugin.getTypeLoader().loadChecks();
         for (CheckType checkType : CheckType.values()) {
-            this.typeGuis.put(checkType, new TypeGUI(checkType, list.stream()
-                    .filter(check -> check.getType() == checkType).collect(Collectors.toList())));
+            this.typeGuis.put(checkType, new TypeGUI(checkType, list.stream().filter(check -> check.getType() == checkType).collect(Collectors.toList())));
         }
         this.mainGui = new MainGUI();
         this.checkGui = new CheckGUI();
