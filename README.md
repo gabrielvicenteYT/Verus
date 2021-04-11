@@ -28,6 +28,7 @@ Verus is a complete scam. There's absolutely no way to deny this. In this reposi
   Sources:
     - Verus MCM thread
     - https://imgur.com/a/QYIKVzz - Used to be on Verus's thread
+    - DMs with Jacob (https://imgur.com/a/QNi6qrb)
 
   - In their MCM thread, they claim to offer "Priority support via discord and/or telegram". This is completely untrue, as one of the most common complains on the MC-Market thread is the total lack of support.
   - "Secure access to our authentication servers" *proceeds to literally get cracked in 10 minutes, then deobfuscated, then source leaked*
@@ -40,6 +41,8 @@ Verus is a complete scam. There's absolutely no way to deny this. In this reposi
   - "Regular is made to detect blatant cheats, Premium adds the capability to detect modern/ghost cheats." - Verus's ghost detections are a joke. I genuinely don't know how this AntiCheat dares to call checks that can be easily falsed while boasting about Vape V2 and V3 detections.
   - Verus's only support staff, Botings, stated that "verus has been doing non public updates", however, when confronted with evidence to the contrary (a screenshot of Jacob stating that Verus hadn't been touched in months), he completely ignored the message. Evidence: https://imgur.com/a/wcnh5jA
   - More to be added soon
+  - Verus states that they're "Designed to run on the netty thread". This is a misleading claim, as any packet based AntiCheat automatically runs checks on the same thread that the packet is received from (netty threads). The implication from their claim is that Verus went out of their way to run checks on the netty thread for extra optimizations, and that this somehow puts them above other AntiCheats in terms of optimization.
+  - The owner of Verus stated that "There appears to be a small group of people spreading false information about Verus. Verus is being regularly updated and maintained". This is completely false. Jacob himself admitted privately to Aidan that he had not touched Verus in months a day before the latest release was pushed out. This might seem contradictive to what he said to Aidan, however when put into the context of what Aidan said (pushing him to update and calling verus a scam), as well as the fact that the update was almost exactly the same as the previous release (which occured months ago) with absolutely no noticeable changes made, it's evident that Jacob lied.
 
 ## Important To-Do
 - ~~Fixup VerusTypeLoader class (Prob recode it)~~
